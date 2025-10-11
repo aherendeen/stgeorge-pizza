@@ -17,7 +17,7 @@
     "@tailwindcss/vite": "^4.1.13",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.15.0",
-    "astro": "^5.13.10",
+    "astro": "^5.14.4",
     "fontace": "^0.3.0",
     "glightbox": "^3.3.1",
     "masonry-layout": "^4.2.2",

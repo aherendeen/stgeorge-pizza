@@ -11,18 +11,18 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
-    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/mdx": "^4.3.7",
     "@playform/inline": "^0.1.2",
-    "@tailwindcss/typography": "^0.5.18",
-    "@tailwindcss/vite": "^4.1.13",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.1.14",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.15.0",
-    "astro": "^5.13.10",
-    "fontace": "^0.3.0",
+    "astro": "^5.14.6",
+    "fontace": "^0.3.1",
     "glightbox": "^3.3.1",
     "masonry-layout": "^4.2.2",
     "swiper": "^12.0.2",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
     "cross-env": "^10.0.0"

@@ -1,10 +1,11 @@
 ---
 import { phone } from "../data/config";
+const { class: className = "" } = Astro.props;
 ---
 
 <a
   href={phone.href}
-  class="not-prose flex items-center gap-x-3 hover:-translate-y-1 hover:-rotate-1 transition duration-300"
+  class={`not-prose flex items-center gap-x-3 hover:-translate-y-1 hover:-rotate-1 transition duration-300 ${className}`}
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"

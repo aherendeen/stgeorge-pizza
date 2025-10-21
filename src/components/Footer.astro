@@ -1,34 +1,68 @@
 ---
 import { menuMain } from "../data/menus";
+import Button from "./Button.astro";
 const currentYear = new Date().getFullYear();
 import { siteName } from "../data/config";
 ---
 
 <footer class="bg-brand-green text-white">
-  <div class="container pt-16 pb-8">
-    <p class="text-center font-bold text-4xl text-white">
-      St. George<span class="text-brand-red bg-white px-3 ml-1 rounded-lg"
-        >Pizza</span
-      >
-    </p>
-    <nav
-      class="flex flex-col sm:flex-row items-center justify-center gap-x-12 gap-y-3 font-medium mt-6"
-      aria-label="Footer"
-    >
-      {
-        menuMain.map((item) => (
-          <a href={item.url} class="hover:underline">
-            {item.name}
-          </a>
-        ))
-      }
-    </nav>
-    <p class="mt-10 text-center text-sm">
-      &copy; {currentYear}
-      {siteName}. All rights reserved. <a
-        class="underline"
-        href="/privacy-policy">Privacy</a
-      >
-    </p>
+  <div class="container pt-16 pb-10">
+    <div class="grid gap-12 lg:grid-cols-[1.3fr,1fr,1fr]">
+      <div class="space-y-6">
+        <a href="/" class="block w-max" aria-label="St. George Pizza home">
+          <p class="font-black text-4xl text-white">
+            St. George<span class="text-brand-red bg-white px-3 ml-1 rounded-lg">Pizza</span>
+          </p>
+        </a>
+        <p class="text-white/70 text-lg">
+          Artisan Italian cooking, legendary hospitality, and digital experiences that keep guests craving more.
+        </p>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <Button color="red" url="/book">Book a table</Button>
+          <Button url="/contact" class="bg-white/10 text-white hover:bg-white/20">
+            Start a project
+          </Button>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Explore</h3>
+        <nav class="mt-4 grid gap-2" aria-label="Footer">
+          {
+            menuMain.map((item) => (
+              <a href={item.url} class="text-white/80 transition hover:text-white">
+                {item.name}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+      <div class="space-y-4">
+        <h3 class="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Visit</h3>
+        <div class="space-y-2 text-white/80">
+          <p>75 E Tabernacle St</p>
+          <p>St. George, Utah 84770</p>
+          <p>(435) 215-5512</p>
+        </div>
+        <div class="space-y-2 text-white/80">
+          <p class="font-semibold text-white">Hours</p>
+          <p>Sun–Thu 11am–10pm</p>
+          <p>Fri–Sat 11am–11pm</p>
+        </div>
+        <div class="space-y-2 text-white/80">
+          <p class="font-semibold text-white">Stay connected</p>
+          <div class="flex gap-4">
+            <a href="https://www.instagram.com" class="transition hover:text-white">Instagram</a>
+            <a href="https://www.facebook.com" class="transition hover:text-white">Facebook</a>
+            <a href="https://www.tiktok.com" class="transition hover:text-white">TikTok</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-center text-sm text-white/70 sm:flex-row">
+      <p>
+        &copy; {currentYear} {siteName}. All rights reserved. <a class="underline" href="/privacy-policy">Privacy</a>
+      </p>
+      <p>Crafted with pride in St. George, Utah.</p>
+    </div>
   </div>
 </footer>

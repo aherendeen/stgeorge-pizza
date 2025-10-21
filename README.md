@@ -17,3 +17,5 @@
     ```sh
     npm run build
     ```
+
+    ---

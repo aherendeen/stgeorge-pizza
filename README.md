@@ -12,7 +12,7 @@
     npm run dev
     ```
 
-**Build for Production**:
+**Build**:
 
     ```sh
     npm run build

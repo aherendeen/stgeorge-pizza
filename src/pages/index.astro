@@ -2,14 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import Hero from "../components/Hero.astro";
-import { Picture, Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import Badge from "../components/Badge.astro";
 import Button from "../components/Button.astro";
 import ButtonCallUs from "../components/ButtonCallUs.astro";
-import Grid from "../components/Grid.astro";
-import Heading from "../components/Heading.astro";
-import WideImage from "../components/WideImage.astro";
 import ReviewSlider from "../components/ReviewSlider.astro";
+import WideImage from "../components/WideImage.astro";
 
 // Images
 import PizzaHero from "../assets/images/pizza-hero.png";
@@ -22,326 +20,451 @@ import Dessert from "../assets/images/dessert.png";
 import Mussels from "../assets/images/mussels2.png";
 ---
 
-<Layout title="Home" pageTitle="Home" description="Welcome to our restaurant!">
-  <Section class:list={"bg-white"}>
-    <Hero>
-      <div slot="hero-content-left" class="prose max-w-none max-lg:order-1">
-        <Badge title="il ristorante italiana" />
-        <h1 class="font-black">St. George's Best Italian Restaurant</h1>
-
-        <p>
-          Experience the taste of Italy with our authentic dishes made from the
-          finest ingredients. Indulge in our wide variety of pizzas, pastas, and
-          desserts, all crafted with love and tradition. Whether you're dining
-          in or taking out, we promise a memorable culinary experience.
-        </p>
-
-        <span class="text-brand-green font-medium">✔ We also deliver</span>
-
-        <div class="mt-8 flex items-center gap-x-8">
-          <Button url="/book">Book now</Button>
-          <ButtonCallUs />
-        </div>
-      </div>
-      <div slot="hero-content-right">
-        <Picture
-          class:list={"mx-auto"}
-          src={PizzaHero}
-          height={600}
-          formats={["avif", "webp"]}
-          alt="A description of my image."
-          loading={"eager"}
-          fetchpriority={"high"}
-        />
-      </div>
-    </Hero>
-  </Section>
-
-  <WideImage
-    image={DecorativeImage}
-    alt="Just an image"
-    class:list={"aspect-video lg:aspect-[16/6]"}
-  />
-
-  <Section class:list={"bg-white"}>
-    <Heading>
-      <h2 slot="heading-title" class="font-black text-brand-green h2">
-        Our dishes
-      </h2>
-      <p slot="heading-content">
-        Explore our selection of authentic Italian dishes, from classic pizzas
-        to homemade pastas.
-      </p>
-    </Heading>
-
-    <Grid>
-      <div slot="grid-content-1">
-        <div class="flex flex-col items-center prose text-center">
-          <Picture
-            class:list={"not-prose w-full h-auto"}
-            src={Pizza}
-            formats={["avif", "webp"]}
-            alt="A description of my image."
-          />
-          <h3 class="h4 mt-0 font-black">Pasta &amp; Spaghetti</h3>
-          <p>
-            Pasta is a staple of Italian cuisine, with a rich history dating
-            back centuries. It comes in various shapes and sizes, each suited to
-            different sauces and preparations.
-          </p>
-        </div>
-      </div>
-
-      <div slot="grid-content-2">
-        <div class="flex flex-col items-center prose text-center">
-          <Picture
-            class:list={"not-prose w-full h-auto"}
-            src={Spaghetti}
-            formats={["avif", "webp"]}
-            alt="A description of my image."
-          />
-          <h3 class="h4 mt-0 font-black">Pasta &amp; Spaghetti</h3>
-          <p>
-            Pasta is a staple of Italian cuisine, with a rich history dating
-            back centuries. It comes in various shapes and sizes, each suited to
-            different sauces and preparations.
-          </p>
-        </div>
-      </div>
-
-      <div slot="grid-content-3">
-        <div class="flex flex-col items-center prose text-center">
-          <Picture
-            class:list={"not-prose w-full h-auto"}
-            src={Fish}
-            formats={["avif", "webp"]}
-            alt="A description of my image."
-          />
-          <h3 class="h4 mt-0 font-black">Pasta &amp; Spaghetti</h3>
-          <p>
-            Pasta is a staple of Italian cuisine, with a rich history dating
-            back centuries. It comes in various shapes and sizes, each suited to
-            different sauces and preparations.
-          </p>
-        </div>
-      </div>
-    </Grid>
-  </Section>
-
-  <Section class:list={"bg-white"}>
-    <Hero>
-      <div slot="hero-content-left" class="prose lg:order-2">
-        <h1 class="font-black">Pizza</h1>
-
-        <p>
-          Pizza is a beloved dish that originated in Italy and has since become
-          a global sensation. Its versatility allows for endless combinations of
-          toppings, from classic margherita with fresh tomatoes, mozzarella, and
-          basil, to more adventurous options like barbecue chicken or vegan
-          cheese.
-        </p>
-
-        <p>
-          Whether enjoyed at a cozy pizzeria or delivered to your doorstep,
-          pizza brings people together and satisfies cravings like no other
-          food. Beyond its delicious taste, pizza also holds cultural
-          significance. It is often associated with gatherings, celebrations,
-          and comfort.
-        </p>
-
-        <div class="mt-8">
-          <Button url="/menu">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              class="size-5 inline-block"
-              aria-hidden="true"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
-                clip-rule="evenodd"></path>
-            </svg>
-            View menu
-          </Button>
-        </div>
-      </div>
-      <div slot="hero-content-right">
-        <Picture
-          class:list={"mx-auto"}
-          src={PizzaHero}
-          height={600}
-          formats={["avif", "webp"]}
-          alt="A description of my image."
-        />
-      </div>
-    </Hero>
-  </Section>
-
-  <Section class:list={"bg-white"}>
-    <Hero>
-      <div slot="hero-content-left" class="prose max-w-none max-lg:order-1">
-        <Badge color="red" title="delicious" />
-        <h2 class="font-black h2 !my-4">Plate of the week</h2>
-
-        <span class="text-brand-red text-2xl font-bold italic"
-          >Fresh Mussels!</span
-        >
-
-        <p>
-          Our plate of the week is a delicious dish that changes every week.
-          This week, we're featuring fresh mussels cooked in a white wine and
-          garlic sauce, served with a side of crispy fries. Don't miss out on
-          this limited-time offer!
-        </p>
-
-        <div class="mt-8">
-          <Button color="red" url="/book">Book now</Button>
-        </div>
-      </div>
-      <div slot="hero-content-right">
-        <Picture
-          class:list={"mx-auto"}
-          src={Mussels}
-          height={600}
-          formats={["avif", "webp"]}
-          alt="A description of my image."
-        />
-      </div>
-    </Hero>
-  </Section>
-
-  <!-- Reviews -->
-  <Section class:list={"bg-brand-red/20 relative"}>
-    <div class="py-16">
+<Layout title="Home" pageTitle="Home" description="Experience artisan Italian cuisine in St. George.">
+  <Section contain={false} class:list={["relative overflow-hidden bg-[#fff8f2]"]}>
+    <div class="absolute inset-x-0 -top-32 h-64 bg-gradient-to-b from-brand-red/10 to-transparent blur-3xl"></div>
+    <div class="container py-20 md:py-24 lg:py-32">
       <Hero>
-        <div slot="hero-content-left" class="prose max-w-none order-2">
-          <div class="text-center not-prose">
-            <Badge color="white" title="reviews" />
+        <div
+          slot="hero-content-left"
+          class="prose max-w-2xl text-balance text-gray-800 max-lg:mx-auto max-lg:text-center"
+        >
+          <Badge color="green" title="Wood-fired Italian kitchen" />
+          <h1 class="font-black leading-tight text-gray-900">
+            Flame-kissed pizza and handmade pasta made for gathering
+          </h1>
+          <p>
+            We ferment our dough for 72 hours, pull mozzarella fresh each morning,
+            and finish every plate with Southern Utah produce. Whether you bring the
+            whole team or order it to your door, St. George Pizza makes every night
+            taste like a celebration.
+          </p>
+          <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+            <Button url="/book" class="w-full sm:w-auto">Reserve a table</Button>
+            <ButtonCallUs class="w-full sm:w-auto" />
           </div>
-          <h2 slot="heading-title" class="font-black h4 text-center mt-0 mb-4">
-            What our customers say...
-          </h2>
-          <div slot="heading-content">
-            <p class="text-center">
-              Don't just take our word for it. Read what our customers have to
-              say about their dining experience at our restaurant.
-            </p>
-
-            <ReviewSlider />
+          <div class="mt-10 grid w-full gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl bg-white/80 px-5 py-4 text-left shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-green">
+                Since 1998
+              </p>
+              <p class="mt-1 text-lg font-semibold text-gray-900">Family owned &amp; operated</p>
+            </div>
+            <div class="rounded-2xl bg-white/80 px-5 py-4 text-left shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-green">
+                4.9 rating
+              </p>
+              <p class="mt-1 text-lg font-semibold text-gray-900">320+ local reviews</p>
+            </div>
+            <div class="rounded-2xl bg-white/80 px-5 py-4 text-left shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-green">
+                Open late
+              </p>
+              <p class="mt-1 text-lg font-semibold text-gray-900">Every day 11am–11pm</p>
+            </div>
           </div>
         </div>
-
-        <div slot="hero-content-right">
+        <div slot="hero-content-right" class="relative">
+          <div class="absolute -left-6 top-6 hidden h-24 w-24 rounded-full bg-brand-red/20 blur-xl lg:block"></div>
           <Picture
-            src={reviewAuthors}
-            alt="Review authors"
-            class="w-full h-auto"
+            class:list={["mx-auto max-w-sm rounded-[2.5rem] border-8 border-white shadow-2xl shadow-brand-green/20"]}
+            src={PizzaHero}
+            height={640}
+            formats={["avif", "webp"]}
+            alt="Chef slicing a wood-fired pizza"
+            loading="eager"
+            fetchpriority="high"
           />
+          <div class="absolute -bottom-8 left-1/2 hidden w-60 -translate-x-1/2 rounded-3xl bg-white px-6 py-5 shadow-xl lg:block">
+            <p class="text-sm font-semibold text-brand-green">Same-night delivery available</p>
+            <p class="mt-1 text-xs text-gray-500">Order before 10:30pm and we deliver for free inside St. George.</p>
+          </div>
         </div>
       </Hero>
     </div>
-
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 320"
-      class="absolute h-40 w-full top-0 inset-x-0 rotate-180"
-      preserveAspectRatio="none"
-      ><path
-        fill="#ffffff"
-        fill-opacity="1"
-        d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-      ></path>
-    </svg>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 320"
-      class="absolute h-40 w-full bottom-0 inset-x-0"
-      preserveAspectRatio="none"
-      ><path
-        fill="#ffffff"
-        fill-opacity="1"
-        d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-      ></path>
-    </svg>
   </Section>
 
-  <!-- Desserts -->
-  <Section class:list={"bg-white"}>
-    <Hero>
-      <div slot="hero-content-left" class="prose max-w-none order-2">
-        <Badge title="dolce" />
-        <h2 slot="heading-title" class="font-black text-brand-green h2 !my-4">
-          Desserts
-        </h2>
-        <div slot="heading-content">
-          <p>
-            Indulge in our selection of sweet treats, from classic tiramisu to
-            decadent chocolate cake. Our desserts are the perfect way to end
-            your meal on a high note.
-          </p>
-
-          <p>
-            Experience the taste of Italy with our authentic dishes made from
-            the finest ingredients. Indulge in our wide variety of pizzas,
-            pastas, and desserts, all crafted with love and tradition. Whether
-            you're dining in or taking out, we promise a memorable culinary
-            experience.
-          </p>
-
-          <div class="mt-8">
-            <Button url="/menu">See our menu</Button>
+  <Section class:list={["bg-white"]}>
+    <div class="mx-auto max-w-3xl text-center">
+      <Badge color="green" title="Signature plates" />
+      <h2 class="h2 font-black text-brand-green">Favorites that keep guests coming back</h2>
+      <p class="mt-4 text-lg text-gray-600">
+        Crafted in small batches with heirloom flour, San Marzano tomatoes, and the freshest
+        ingredients we can source from Utah farms and Italian markets.
+      </p>
+    </div>
+    <div class="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+      <article class="flex flex-col rounded-3xl border border-gray-100 bg-white/90 shadow-lg shadow-gray-200/30">
+        <Picture
+          class:list={["aspect-[4/3] w-full rounded-t-3xl object-cover"]}
+          src={Pizza}
+          alt="Wood-fired margherita pizza topped with basil"
+          formats={["avif", "webp"]}
+        />
+        <div class="flex flex-1 flex-col gap-4 px-6 pb-8 pt-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-2xl font-black text-gray-900">San Pietro Margherita</h3>
+            <span class="rounded-full bg-brand-red/10 px-3 py-1 text-sm font-semibold text-brand-red">$18</span>
           </div>
+          <p class="text-base text-gray-600">
+            Naturally leavened dough, hand-stretched mozzarella, basil picked at service, and a drizzle of
+            first-press olive oil.
+          </p>
+          <ul class="mt-auto space-y-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2">
+              <span class="inline-flex size-2 rounded-full bg-brand-green"></span>
+              72-hour fermentation for a light, airy crust
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="inline-flex size-2 rounded-full bg-brand-green"></span>
+              Fire-roasted at 900°F in our imported oven
+            </li>
+          </ul>
+        </div>
+      </article>
+      <article class="flex flex-col rounded-3xl border border-gray-100 bg-white/90 shadow-lg shadow-gray-200/30">
+        <Picture
+          class:list={["aspect-[4/3] w-full rounded-t-3xl object-cover"]}
+          src={Spaghetti}
+          alt="House made tagliatelle pasta with truffle butter"
+          formats={["avif", "webp"]}
+        />
+        <div class="flex flex-1 flex-col gap-4 px-6 pb-8 pt-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-2xl font-black text-gray-900">Truffle Tagliatelle</h3>
+            <span class="rounded-full bg-brand-red/10 px-3 py-1 text-sm font-semibold text-brand-red">$24</span>
+          </div>
+          <p class="text-base text-gray-600">
+            House-made egg pasta tossed in a silk truffle butter sauce, parmigiano-reggiano, and roasted mushrooms.
+          </p>
+          <ul class="mt-auto space-y-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2">
+              <span class="inline-flex size-2 rounded-full bg-brand-green"></span>
+              Finished to order in a copper sauté pan
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="inline-flex size-2 rounded-full bg-brand-green"></span>
+              Available gluten-free with 24-hour notice
+            </li>
+          </ul>
+        </div>
+      </article>
+      <article class="flex flex-col rounded-3xl border border-gray-100 bg-white/90 shadow-lg shadow-gray-200/30">
+        <Picture
+          class:list={["aspect-[4/3] w-full rounded-t-3xl object-cover"]}
+          src={Fish}
+          alt="Seafood fra diavolo with clams and mussels"
+          formats={["avif", "webp"]}
+        />
+        <div class="flex flex-1 flex-col gap-4 px-6 pb-8 pt-6">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-2xl font-black text-gray-900">Coastal Fra Diavolo</h3>
+            <span class="rounded-full bg-brand-red/10 px-3 py-1 text-sm font-semibold text-brand-red">$29</span>
+          </div>
+          <p class="text-base text-gray-600">
+            Wild shrimp, day-boat mussels, calamari, and Calabrian chili simmered in a bright San Marzano sauce.
+          </p>
+          <ul class="mt-auto space-y-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2">
+              <span class="inline-flex size-2 rounded-full bg-brand-green"></span>
+              Served over hand-cut linguine with charred lemon
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="inline-flex size-2 rounded-full bg-brand-green"></span>
+              Pair it with our citrus-forward Verdicchio
+            </li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <Button url="/menu">Explore the full menu</Button>
+      <a
+        href="/gallery"
+        class="text-sm font-semibold text-brand-green transition hover:text-brand-red"
+      >
+        View the dining room →
+      </a>
+    </div>
+  </Section>
+
+  <Section class:list={["bg-brand-green text-white"]}>
+    <div class="mx-auto max-w-3xl text-center">
+      <Badge color="white" title="Why partners choose us" />
+      <h2 class="h2 font-black">Built for unforgettable pizza nights</h2>
+      <p class="mt-4 text-lg text-white/80">
+        From intimate rehearsal dinners to high-volume catering, our team is obsessed with hospitality and
+        operational excellence so you can relax and enjoy the moment.
+      </p>
+    </div>
+    <div class="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div class="flex flex-col gap-4 rounded-3xl bg-white/10 p-6 shadow-lg shadow-black/10">
+        <div class="inline-flex size-12 items-center justify-center rounded-full bg-white/20">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="size-6"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v6l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold">Rapid-fire service</h3>
+        <p class="text-sm text-white/75">
+          5-minute average ticket times even on peak nights thanks to a dual-station brick oven line.
+        </p>
+      </div>
+      <div class="flex flex-col gap-4 rounded-3xl bg-white/10 p-6 shadow-lg shadow-black/10">
+        <div class="inline-flex size-12 items-center justify-center rounded-full bg-white/20">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="size-6"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m4.5 12.75 6 6 9-13.5"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold">Consistency you can taste</h3>
+        <p class="text-sm text-white/75">
+          Daily kitchen briefs, weighed ingredients, and digital recipe logs keep every pie on point.
+        </p>
+      </div>
+      <div class="flex flex-col gap-4 rounded-3xl bg-white/10 p-6 shadow-lg shadow-black/10">
+        <div class="inline-flex size-12 items-center justify-center rounded-full bg-white/20">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="size-6"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 7.5l9.75 5.25L21.75 7.5m-19.5 9 9.75 5.25L21.75 16.5m-19.5-9v9l9.75 5.25 9.75-5.25v-9"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold">Catering &amp; events</h3>
+        <p class="text-sm text-white/75">
+          Mobile oven, full-service staffing, and custom menus for celebrations from 20 to 200 guests.
+        </p>
+      </div>
+      <div class="flex flex-col gap-4 rounded-3xl bg-white/10 p-6 shadow-lg shadow-black/10">
+        <div class="inline-flex size-12 items-center justify-center rounded-full bg-white/20">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="size-6"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3c2.755 2.755 6 4.5 6 7.5a6 6 0 1 1-12 0c0-3 3.245-4.745 6-7.5Z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold">Seasonal creativity</h3>
+        <p class="text-sm text-white/75">
+          Quarterly menu drops inspired by Italian coastlines, mountain markets, and our chef's travels.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <WideImage image={DecorativeImage} alt="Guests enjoying dinner" class:list={["aspect-[16/9] object-cover"]} />
+
+  <Section class:list={["bg-white"]}>
+    <Hero>
+      <div slot="hero-content-left" class="prose max-w-xl text-gray-700 max-lg:order-2">
+        <Badge color="green" title="From dough to delight" />
+        <h2 class="h2 font-black text-brand-green">Every detail is intentional</h2>
+        <p>
+          Our chefs grind Italian flour in-house, culture heirloom sourdough, and stretch every crust to order.
+          Handmade sauces simmer all day, while desserts are built in our pastry lab minutes before they hit your table.
+        </p>
+        <p>
+          Prefer plant-forward? Try our smoked cauliflower pie with cashew ricotta. Gluten-free? We proof a separate
+          batch of dough nightly so everyone can join the feast.
+        </p>
+        <div class="mt-6 flex flex-col gap-4 sm:flex-row">
+          <Button url="/about-us">Meet the team</Button>
+          <Button url="/contact" color="red">Plan an event</Button>
         </div>
       </div>
-
-      <div slot="hero-content-right">
+      <div slot="hero-content-right" class="max-lg:mx-auto">
         <Picture
-          class:list={"mx-auto"}
+          class:list={["mx-auto max-w-lg rounded-[2.5rem] border-8 border-white shadow-2xl shadow-gray-300/40"]}
           src={Dessert}
           height={600}
           formats={["avif", "webp"]}
-          alt="A description of my image."
+          alt="Chef finishing an Italian dessert"
         />
       </div>
     </Hero>
   </Section>
 
-  <!-- Contact -->
-  <Section class:list={"bg-white"}>
+  <Section class:list={["bg-white"]}>
     <Hero>
-      <div slot="hero-content-left" class="prose max-w-none">
-        <Badge color="red" title="benvenuto" />
-        <h2 slot="heading-title" class="font-black text-brand-red h2 !my-4">
-          Drop by and say hello
-        </h2>
-        <div slot="heading-content">
-          <p>
-            We're located in the heart of the city, just a stone's throw away
-            from the main square. Our restaurant is the perfect place to enjoy a
-            delicious meal with friends and family.
-          </p>
-
-          <span class="text-brand-red font-medium">
-            ✔ We also do take-away, so you can enjoy your food at home
-          </span>
-
-          <div class="mt-8">
-            <Button color="red" url="/book">Book a table</Button>
-          </div>
+      <div slot="hero-content-left" class="prose max-w-xl text-gray-700 max-lg:order-2">
+        <Badge color="red" title="Plate of the week" />
+        <h2 class="h2 font-black text-brand-red">Charred garlic mussels</h2>
+        <p>
+          A limited-run favorite featuring blue mussels steamed in roasted garlic, blistered tomatoes, and white wine.
+          Served with grilled ciabatta and basil aioli for mopping up every last drop.
+        </p>
+        <p class="font-semibold text-gray-800">Available through Sunday — pre-order to guarantee your share.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <span class="rounded-full bg-brand-red/10 px-4 py-2 text-sm font-semibold text-brand-red">Only 25 servings nightly</span>
+          <span class="rounded-full bg-brand-red/10 px-4 py-2 text-sm font-semibold text-brand-red">Complimentary sparkling pour</span>
+        </div>
+        <div class="mt-6 flex flex-col gap-4 sm:flex-row">
+          <Button color="red" url="/book">Reserve tonight</Button>
+          <Button url="/menu">See all specials</Button>
         </div>
       </div>
-
-      <div slot="hero-content-right">
+      <div slot="hero-content-right" class="max-lg:mx-auto">
         <Picture
-          class:list={"mx-auto"}
-          src={Dessert}
+          class:list={["mx-auto max-w-lg rounded-[2.5rem] border-8 border-white shadow-2xl shadow-brand-red/20"]}
+          src={Mussels}
           height={600}
           formats={["avif", "webp"]}
-          alt="A description of my image."
+          alt="Fresh mussels in a tomato broth"
         />
       </div>
     </Hero>
+  </Section>
+
+  <Section class:list={["bg-brand-red/5 relative overflow-hidden"]}>
+    <div class="mx-auto max-w-3xl text-center">
+      <Badge color="white" title="Guest love" />
+      <h2 class="h3 font-black text-brand-green">"The best pizza west of Napoli"</h2>
+      <p class="mt-4 text-lg text-gray-600">
+        Our community says it best. Slide through the latest Google, Yelp, and OpenTable reviews from guests who trust
+        us with their anniversaries, business lunches, and game-night takeout.
+      </p>
+    </div>
+    <div class="mt-10">
+      <ReviewSlider />
+    </div>
+    <div class="mt-12 flex flex-col items-center gap-6 lg:flex-row lg:justify-center">
+      <Picture
+        src={reviewAuthors}
+        alt="Happy St. George Pizza guests"
+        class:list={["mx-auto w-full max-w-xl"]}
+      />
+      <div class="rounded-3xl bg-white p-6 text-left shadow-lg shadow-gray-300/30">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-brand-green">Community</p>
+        <p class="mt-3 text-lg text-gray-600">
+          We sponsor four local little league teams, host fundraiser nights every month, and donate weekly pies to
+          Switchpoint Community Resource Center.
+        </p>
+      </div>
+    </div>
+    <div class="pointer-events-none absolute inset-x-10 top-10 hidden h-32 rounded-full bg-white/60 blur-3xl sm:block"></div>
+  </Section>
+
+  <Section class:list={["bg-white"]}>
+    <div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
+      <div class="prose max-w-xl text-gray-700">
+        <Badge color="green" title="Plan your visit" />
+        <h2 class="h2 font-black text-brand-green">Perfectly situated in downtown St. George</h2>
+        <p>
+          Find us one block off Town Square Park with private parking, bike racks, and plenty of room for large groups.
+          Walk in, book online, or call our concierge team to personalize your evening.
+        </p>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          <div class="rounded-3xl bg-brand-green/5 p-6">
+            <p class="text-sm font-semibold text-brand-green">Hours</p>
+            <p class="mt-2 text-base text-gray-700">Sun–Thu 11am–10pm</p>
+            <p class="text-base text-gray-700">Fri–Sat 11am–11pm</p>
+          </div>
+          <div class="rounded-3xl bg-brand-green/5 p-6">
+            <p class="text-sm font-semibold text-brand-green">Visit</p>
+            <p class="mt-2 text-base text-gray-700">75 E Tabernacle St, St. George, UT</p>
+            <p class="text-base text-gray-700">Free parking after 5pm</p>
+          </div>
+        </div>
+        <div class="mt-6">
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-brand-green transition hover:text-brand-red"
+          >
+            Get directions &amp; contact →
+          </a>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-[2.5rem] border-8 border-white shadow-2xl shadow-gray-300/30">
+        <iframe
+          title="Map showing the location of St. George Pizza"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-113.5852%2C37.1067%2C-113.5798%2C37.1103&amp;layer=mapnik&amp;marker=37.1085%2C-113.5825"
+          class="h-80 w-full"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </Section>
+
+  <Section contain={false} class:list={["bg-brand-green"]}>
+    <div class="container py-16 md:py-20 lg:py-24">
+      <div class="grid gap-10 lg:grid-cols-[1.2fr,0.8fr] lg:items-center">
+        <div class="text-white">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-white/70">Let's build something delicious</p>
+          <h2 class="mt-4 text-4xl font-black sm:text-5xl">
+            Ready for a pizza website that books more tables?
+          </h2>
+          <p class="mt-6 text-lg text-white/80">
+            From mouthwatering photography to online ordering integrations, we design restaurant sites that convert
+            hungry visitors into loyal guests. Tell us about your concept and we’ll craft a site that sells the sizzle.
+          </p>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <Button color="red" url="/contact">Schedule a discovery call</Button>
+            <Button url="/gallery" color="green">See our work</Button>
+          </div>
+        </div>
+        <div class="rounded-3xl bg-white/10 p-6 text-white shadow-xl shadow-black/10">
+          <h3 class="text-xl font-semibold">Included with every build</h3>
+          <ul class="mt-4 space-y-3 text-sm text-white/80">
+            <li class="flex items-start gap-3">
+              <span class="mt-1 inline-flex size-2 rounded-full bg-white"></span>
+              Mobile-first layouts tested on iPhone and Android
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 inline-flex size-2 rounded-full bg-white"></span>
+              Integrated reservations, online ordering, and review widgets
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 inline-flex size-2 rounded-full bg-white"></span>
+              SEO copywriting tailored to your neighborhood
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 inline-flex size-2 rounded-full bg-white"></span>
+              Analytics dashboards to track bookings and catering leads
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </Section>
 </Layout>

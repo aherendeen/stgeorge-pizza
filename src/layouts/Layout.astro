@@ -3,66 +3,48 @@ import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-const { pageTitle, title, description } = Astro.props;
-const baseUrl = `${Astro.url.protocol}//${Astro.url.host}`;
-import { siteLang, themeColor } from "../data/config";
+import { siteLang, themeColor, siteName, siteSlogan } from "../data/config";
+
+const {
+  pageTitle = siteName,
+  title = siteName,
+  description = siteSlogan,
+  structuredData,
+} = Astro.props;
+
+const canonical = `${Astro.url.protocol}//${Astro.url.host}${Astro.url.pathname}`;
 ---
 
 <!doctype html>
-<html lang={siteLang}>
+<html lang={siteLang} class="bg-[var(--color-cloud)]">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content={themeColor} />
     <meta name="description" content={description} />
+    <meta name="theme-color" content={themeColor} />
     <meta name="robots" content="index,follow" />
-    <meta name="googlebot" content="index,follow" />
-    <link rel="author" href="humans.txt" />
-
-    <!-- <link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/images/favicon/apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="/images/favicon/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="/images/favicon/favicon-16x16.png"
-		/>
-		<link rel="manifest" href="/site.webmanifest" />
-		<link
-			rel="mask-icon"
-			href="/images/favicon/safari-pinned-tab.svg"
-			color="#E6F4FF"
-		/> -->
-    <meta name="msapplication-TileColor" content="#ffffff" />
-
-    <meta property="og:url" content={Astro.url} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
-    <meta property="og:image" content={`${baseUrl}/images/og-image.jpg`} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="WP Infusion" />
-    <meta property="og:locale" content={siteLang} />
-
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:url" content={Astro.url} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <!-- <meta name="twitter:image" content={`${baseUrl}/images/og-image.jpg`} /> -->
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap"
+    />
     <title>{pageTitle}</title>
+    {structuredData && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
     <ClientRouter />
   </head>
-  <body>
+  <body class="min-h-screen bg-transparent">
     <Header />
-    <main>
+    <main class="pb-24">
       <slot />
     </main>
     <Footer />

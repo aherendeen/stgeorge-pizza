@@ -1,20 +1,29 @@
 ---
 const {
-  color = "green",
+  variant = "primary",
   url = "",
   newtab = false,
   As = "a",
   class: className = "",
   ...props
 } = Astro.props;
+
+const variants: Record<string, string> = {
+  primary: "button button-primary",
+  secondary: "button button-secondary",
+  ghost:
+    "inline-flex items-center justify-center gap-2 rounded-full border border-[rgba(140,30,33,0.2)] bg-transparent px-5 py-2.5 text-sm font-semibold text-[color:var(--color-brick)] transition hover:border-[rgba(140,30,33,0.4)] hover:text-[color:var(--color-brick)]",
+};
+
+const baseClass = variants[variant] ?? variants.primary;
 ---
 
 <As
-        class={`not-prose button button-${color} ${className}`}
-	href={url}
-	target={newtab ? "_blank" : "_self"}
-	rel={newtab ? "noopener noreferrer" : ""}
-	{...props}
+  class={`${baseClass} ${className}`}
+  href={url}
+  target={newtab ? "_blank" : "_self"}
+  rel={newtab ? "noopener noreferrer" : ""}
+  {...props}
 >
-	<slot />
+  <slot />
 </As>

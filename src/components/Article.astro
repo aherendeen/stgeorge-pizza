@@ -1,8 +1,8 @@
 ---
-const { contain = false } = Astro.props;
-const classname = contain ? "prose mx-auto" : "prose max-w-none";
+const { contain = false, class: className = "" } = Astro.props;
+const base = contain ? "prose mx-auto" : "prose max-w-none";
 ---
 
-<article class={classname}>
+<article class={`${base} ${className}`}>
   <slot />
 </article>

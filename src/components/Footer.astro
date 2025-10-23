@@ -1,68 +1,94 @@
 ---
 import { menuMain } from "../data/menus";
-import Button from "./Button.astro";
-const currentYear = new Date().getFullYear();
-import { siteName } from "../data/config";
+import { address, hours, phone, email, siteName } from "../data/config";
 ---
 
-<footer class="bg-brand-green text-white">
-  <div class="container pt-16 pb-10">
-    <div class="grid gap-12 lg:grid-cols-[1.3fr,1fr,1fr]">
+<footer class="mt-24 bg-[color:var(--color-ink)] text-[color:var(--color-cream)]">
+  <div class="container py-16 lg:py-20">
+    <div class="grid gap-12 lg:grid-cols-[1.5fr,1fr,1fr]">
       <div class="space-y-6">
-        <a href="/" class="block w-max" aria-label="St. George Pizza home">
-          <p class="font-black text-4xl text-white">
-            St. George<span class="text-brand-red bg-white px-3 ml-1 rounded-lg">Pizza</span>
-          </p>
+        <a href="/" class="inline-flex items-center gap-3" aria-label="St. George Pizza home">
+          <span class="flex size-12 items-center justify-center rounded-full bg-[rgba(242,199,125,0.12)] text-[color:var(--color-peach)]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              class="size-6"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.75 9.75c0-3.728 3.022-6.75 6.75-6.75h5c3.728 0 6.75 3.022 6.75 6.75v8.25a1.5 1.5 0 0 1-2.25 1.304l-3.5-2.04-3.5 2.04a1.5 1.5 0 0 1-2.25-1.304z"
+              />
+            </svg>
+          </span>
+          <span class="text-2xl font-semibold">{siteName}</span>
         </a>
-        <p class="text-white/70 text-lg">
-          Artisan Italian cooking, legendary hospitality, and digital experiences that keep guests craving more.
+        <p class="max-w-lg text-base/7 text-[rgba(255,255,255,0.72)]">
+          A contemporary Italian kitchen where flame, craft, and hospitality meet the spirit of Southern Utah. Join us for a night of wood-fired pizzas, handmade pasta, and soulful service.
         </p>
-        <div class="flex flex-col gap-3 sm:flex-row">
-          <Button color="red" url="/book">Book a table</Button>
-          <Button url="/contact" class="bg-white/10 text-white hover:bg-white/20">
-            Start a project
-          </Button>
+        <div class="flex flex-wrap gap-3">
+          <a href="/book" class="button button-primary text-xs uppercase tracking-[0.3em]">
+            Reserve a table
+          </a>
+          <a href={phone.href} class="button button-secondary text-xs uppercase tracking-[0.3em]">
+            Call {phone.label}
+          </a>
         </div>
       </div>
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Explore</h3>
-        <nav class="mt-4 grid gap-2" aria-label="Footer">
-          {
-            menuMain.map((item) => (
-              <a href={item.url} class="text-white/80 transition hover:text-white">
-                {item.name}
-              </a>
-            ))
-          }
+
+      <div class="space-y-4">
+        <h3 class="text-xs font-semibold uppercase tracking-[0.35em] text-[rgba(255,255,255,0.6)]">Navigate</h3>
+        <nav class="grid gap-2" aria-label="Footer">
+          {menuMain.map((item) => (
+            <a href={item.url} class="text-base/6 text-[rgba(255,255,255,0.72)] transition hover:text-white">
+              {item.name}
+            </a>
+          ))}
+          <a href="/privacy-policy" class="text-base/6 text-[rgba(255,255,255,0.72)] transition hover:text-white">Privacy Policy</a>
         </nav>
       </div>
-      <div class="space-y-4">
-        <h3 class="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Visit</h3>
-        <div class="space-y-2 text-white/80">
-          <p>75 E Tabernacle St</p>
-          <p>St. George, Utah 84770</p>
-          <p>(435) 215-5512</p>
+
+      <div class="space-y-6">
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-[0.35em] text-[rgba(255,255,255,0.6)]">Visit</h3>
+          <p class="text-base/6 text-[rgba(255,255,255,0.72)]">
+            {address.street}
+            <br />
+            {address.city}, {address.state} {address.zip}
+          </p>
+          <a href={phone.href} class="block text-base font-semibold text-white">{phone.label}</a>
+          <a href={email.href} class="block text-sm text-[rgba(255,255,255,0.72)]">{email.label}</a>
         </div>
-        <div class="space-y-2 text-white/80">
-          <p class="font-semibold text-white">Hours</p>
-          <p>Sun–Thu 11am–10pm</p>
-          <p>Fri–Sat 11am–11pm</p>
-        </div>
-        <div class="space-y-2 text-white/80">
-          <p class="font-semibold text-white">Stay connected</p>
-          <div class="flex gap-4">
-            <a href="https://www.instagram.com" class="transition hover:text-white">Instagram</a>
-            <a href="https://www.facebook.com" class="transition hover:text-white">Facebook</a>
-            <a href="https://www.tiktok.com" class="transition hover:text-white">TikTok</a>
-          </div>
+        <div class="space-y-2">
+          <h3 class="text-xs font-semibold uppercase tracking-[0.35em] text-[rgba(255,255,255,0.6)]">Hours</h3>
+          <dl class="grid grid-cols-1 gap-1 text-sm text-[rgba(255,255,255,0.72)]">
+            {Object.entries(hours).map(([day, value]) => (
+              <div class="flex justify-between gap-4">
+                <dt class="uppercase tracking-[0.2em]">
+                  {day.charAt(0).toUpperCase() + day.slice(1)}
+                </dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </div>
-    <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-center text-sm text-white/70 sm:flex-row">
-      <p>
-        &copy; {currentYear} {siteName}. All rights reserved. <a class="underline" href="/privacy-policy">Privacy</a>
-      </p>
-      <p>Crafted with pride in St. George, Utah.</p>
+
+    <div class="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-[rgba(255,255,255,0.55)] lg:flex-row lg:items-center lg:justify-between">
+      <p>&copy; {new Date().getFullYear()} {siteName}. Crafted with pride in St. George, Utah.</p>
+      <div class="flex flex-wrap items-center gap-4 text-[rgba(255,255,255,0.7)]">
+        <span class="text-xs uppercase tracking-[0.3em] text-[rgba(255,255,255,0.5)]">Follow</span>
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com" class="transition hover:text-white">Instagram</a>
+          <a href="https://www.facebook.com" class="transition hover:text-white">Facebook</a>
+          <a href="https://www.tiktok.com" class="transition hover:text-white">TikTok</a>
+        </div>
+      </div>
     </div>
   </div>
 </footer>

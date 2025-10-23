@@ -1,18 +1,15 @@
 ---
-const { color = "green", title = "" }: BadgeProps = Astro.props;
-
 interface BadgeProps {
-	color?: "red" | "green";
-	title?: string;
+  tone?: "gold" | "olive";
+  title?: string;
 }
 
-const colors = {
-        red: "bg-brand-red/5 text-brand-red ring-1 ring-brand-red",
-        green: "bg-brand-green/5 text-brand-green ring-1 ring-brand-green",
-        white: "bg-white text-brand-green ring-1 ring-white/60",
+const { tone = "gold", title = "" }: BadgeProps = Astro.props;
+
+const tones = {
+  gold: "badge badge-gold",
+  olive: "badge badge-olive",
 };
 ---
 
-<span class={`inline-flex not-prose items-center mb-4 rounded-full px-3 py-1 text-base font-semibold ${colors[color]}`}
-	>{title}</span
->
+<span class={`${tones[tone] ?? tones.gold}`}>{title}</span>

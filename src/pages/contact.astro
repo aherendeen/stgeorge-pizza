@@ -1,21 +1,44 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
-import Heading from "../components/Heading.astro";
+import Badge from "../components/Badge.astro";
 import FormContact from "../components/forms/FormContact.astro";
+import Card from "../components/Card.astro";
+import { address, phone, email } from "../data/config";
 ---
 
-<Layout>
+<Layout
+  pageTitle="Contact St. George Pizza"
+  description="Reach out to the St. George Pizza team for reservations, events, partnerships, or feedback."
+>
   <Section>
-    <Heading>
-      <h2 slot="heading-title" class="font-black text-brand-green h2">
-        Contact
-      </h2>
-      <p slot="heading-content">
-        Get in touch with us for any questions or inquiries.
+    <div class="mx-auto max-w-3xl text-center space-y-4">
+      <Badge tone="olive" title="Contact" />
+      <h1>We’d love to hear from you</h1>
+      <p class="text-lg text-[rgba(27,29,33,0.72)]">
+        Whether you’re planning an event, requesting catering, or simply craving recommendations, our hospitality team is ready to help.
       </p>
-    </Heading>
+    </div>
+  </Section>
 
-    <FormContact />
+  <Section class="bg-white/90">
+    <div class="grid gap-12 lg:grid-cols-[0.85fr,1.15fr] lg:items-start">
+      <div class="space-y-4">
+        <Card class="bg-white/95">
+          <p class="text-xs uppercase tracking-[0.3em] text-[color:var(--color-brick)]">Visit</p>
+          <p class="mt-2 text-[color:var(--color-forest)]">{address.street}, {address.city}, {address.state} {address.zip}</p>
+          <p class="mt-2 text-sm text-[rgba(27,29,33,0.72)]">Complimentary valet after 5pm, validated garage parking all day.</p>
+        </Card>
+        <Card class="bg-white/95">
+          <p class="text-xs uppercase tracking-[0.3em] text-[color:var(--color-brick)]">Say hello</p>
+          <p class="mt-2 text-[color:var(--color-forest)]">Phone: <a href={phone.href}>{phone.label}</a></p>
+          <p class="text-[color:var(--color-forest)]">Email: <a href={email.href}>{email.label}</a></p>
+          <p class="mt-2 text-sm text-[rgba(27,29,33,0.72)]">We respond within business hours and monitor messages late for urgent needs.</p>
+        </Card>
+      </div>
+      <div class="rounded-3xl bg-white/95 p-10 shadow-[var(--shadow-soft)] ring-1 ring-black/5">
+        <FormContact />
+      </div>
+    </div>
   </Section>
 </Layout>

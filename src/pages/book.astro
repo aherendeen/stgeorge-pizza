@@ -1,22 +1,45 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
-import Heading from "../components/Heading.astro";
+import Badge from "../components/Badge.astro";
 import FormBook from "../components/forms/FormBook.astro";
+import Card from "../components/Card.astro";
+import { phone } from "../data/config";
 ---
 
-<Layout>
+<Layout
+  pageTitle="Reserve a table — St. George Pizza"
+  description="Request a reservation at St. George Pizza. Share your details and our concierge team will confirm within the hour."
+>
   <Section>
-    <Heading>
-      <h2 slot="heading-title" class="font-black text-brand-green h2">
-        Book a table
-      </h2>
-      <p slot="heading-content" class="text-pretty">
-        Reserve a table for your next meal. We'll get back to you to confirm
-        your booking.
+    <div class="mx-auto max-w-3xl text-center space-y-4">
+      <Badge tone="olive" title="Reservations" />
+      <h1>Book your next gathering</h1>
+      <p class="text-lg text-[rgba(27,29,33,0.72)]">
+        Complete the form below and our concierge team will confirm within the hour. For same-day reservations, call {phone.label}.
       </p>
-    </Heading>
+    </div>
+  </Section>
 
-    <FormBook />
+  <Section class="bg-white/90">
+    <div class="grid gap-12 lg:grid-cols-[1fr,0.8fr] lg:items-start">
+      <div class="rounded-3xl bg-white/95 p-10 shadow-[var(--shadow-soft)] ring-1 ring-black/5">
+        <FormBook />
+      </div>
+      <div class="space-y-6">
+        <Card class="bg-white/95">
+          <p class="text-xs uppercase tracking-[0.3em] text-[color:var(--color-brick)]">Groups &amp; celebrations</p>
+          <p class="mt-3 text-[rgba(27,29,33,0.72)]">
+            Garden room seats up to 18 guests. Buyouts available Sunday–Thursday. Email events@stgeorgepizza.com for custom menus.
+          </p>
+        </Card>
+        <Card class="bg-white/95">
+          <p class="text-xs uppercase tracking-[0.3em] text-[color:var(--color-brick)]">Guarantee</p>
+          <p class="mt-3 text-[rgba(27,29,33,0.72)]">
+            We hold tables for 15 minutes and send SMS updates. Need to adjust your party size? Text us anytime and we’ll accommodate.
+          </p>
+        </Card>
+      </div>
+    </div>
   </Section>
 </Layout>

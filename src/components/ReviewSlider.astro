@@ -4,24 +4,20 @@ import type { Review } from "../types";
 const allReviews: Review[] = await getCollection("reviews");
 ---
 
-<div class="swiper w-full mt-8 bg-white rounded-lg">
-  <div class="swiper-wrapper h-auto w-auto pt-8 pb-12">
-    {
-      allReviews.map((review) => (
-        <div class="swiper-slide cursor-pointer select-none">
-          <div class="px-4 lg:px-8">
-            <blockquote class="border-none">
-              <p class="text-center font-medium text-2xl text-balance">
-                {review.data.review}
-              </p>
-              <footer class="text-center mt-4">
-                — <cite>{review.data.author}</cite>
-              </footer>
-            </blockquote>
-          </div>
+<div class="swiper w-full">
+  <div class="swiper-wrapper pb-10">
+    {allReviews.map((review) => (
+      <div class="swiper-slide">
+        <div class="rounded-3xl bg-white/90 p-8 text-center shadow-[var(--shadow-soft)] ring-1 ring-black/5">
+          <p class="text-xl font-semibold text-[color:var(--color-forest)]">
+            “{review.data.review}”
+          </p>
+          <p class="mt-4 text-sm uppercase tracking-[0.25em] text-[rgba(27,29,33,0.6)]">
+            {review.data.author}
+          </p>
         </div>
-      ))
-    }
+      </div>
+    ))}
   </div>
   <div class="swiper-pagination"></div>
 </div>
@@ -33,17 +29,26 @@ const allReviews: Review[] = await getCollection("reviews");
   import "swiper/css/pagination";
 
   document.addEventListener("astro:page-load", () => {
-    const swiper = document.querySelector(".swiper") as HTMLElement;
-    new Swiper(swiper, {
+    const swiperEl = document.querySelector<HTMLElement>(".swiper");
+    if (!swiperEl) return;
+
+    new Swiper(swiperEl, {
       modules: [Pagination, Autoplay],
       loop: true,
       slidesPerView: 1,
       spaceBetween: 32,
       autoplay: {
-        delay: 2500,
+        delay: 3500,
+        disableOnInteraction: false,
       },
       pagination: {
         el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 2,
+        },
       },
     });
   });

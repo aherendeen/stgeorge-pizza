@@ -1,35 +1,20 @@
 {
   "name": "st-george-pizza",
   "type": "module",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "build": "cross-env TZ=America/Denver astro build",
-    "postbuild": "node ./scripts/generate-sitemap.js && node ./scripts/generate-robots.js",
-    "lint": "astro check",
-    "test:ui": "playwright test",
+    "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "check": "astro check",
+    "test": "playwright test"
   },
   "dependencies": {
-    "@astrojs/alpinejs": "^0.4.9",
-    "@astrojs/mdx": "^4.3.7",
-    "@playform/inline": "^0.1.2",
-    "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.1.14",
-    "@types/alpinejs": "^3.13.11",
-    "alpinejs": "^3.15.0",
-    "astro": "^5.14.6",
-    "fontace": "^0.3.1",
-    "glightbox": "^3.3.1",
-    "masonry-layout": "^4.2.2",
-    "swiper": "^12.0.2",
-    "tailwindcss": "^4.1.14"
+    "astro": "^5.14.6"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.5",
     "@playwright/test": "^1.56.1",
-    "cross-env": "^10.0.0",
     "typescript": "^5.9.3"
   }
 }

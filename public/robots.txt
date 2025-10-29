@@ -1,0 +1,5 @@
+# robots.txt for st-george-pizza.vercel.app
+User-agent: *
+Allow: /
+
+Sitemap: https://st-george-pizza.vercel.app/sitemap.xml

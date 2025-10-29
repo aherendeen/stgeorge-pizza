@@ -1,0 +1,18 @@
+# humanstxt.org/Standard.html
+# This file is used to provide information about the people who have contributed to building the website.
+
+# DEVELOPER
+Name: Andrew Herendeen
+Company: aherendeen
+Location: St. George, UT, USA
+X: https://x.com/_aherendeen
+LinkedIn: https://linkedin.com/in/herendeenandrew
+Website: https://st-george-pizza.vercel.app
+Email: info@aherendeen.com
+
+# STACK
+Astro
+TailwindCSS
+
+# SITE
+Last update: 9-15-2025

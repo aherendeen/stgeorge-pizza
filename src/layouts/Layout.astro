@@ -63,5 +63,22 @@ const fullTitle = pageTitle ? `${pageTitle} | ${siteName}` : siteName;
     <Footer />
     <ScrollToTop />
     <MobileToolbar />
+    
+    <!-- Reinitialize Alpine after View Transitions -->
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        // @ts-ignore
+        if (window.Alpine) {
+          // Reinitialize Alpine components after page navigation
+          document.querySelectorAll('[x-data]').forEach((el) => {
+            // @ts-ignore
+            if (!el._x_dataStack) {
+              // @ts-ignore
+              window.Alpine.initTree(el);
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>

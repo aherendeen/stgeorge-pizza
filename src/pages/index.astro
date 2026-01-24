@@ -16,11 +16,12 @@ import ReviewSlider from "../components/ReviewSlider.astro";
 import PizzaHero from "../assets/images/pizza-hero.png";
 import Pizza from "../assets/images/pizza.png";
 import Spaghetti from "../assets/images/spaghetti.png";
-import Fish from "../assets/images/fish.png";
+import Chicken from "../assets/images/fish.png";
 import DecorativeImage from "../assets/images/pexels-shvetsa-5953523.jpg";
 import reviewAuthors from "../assets/images/review-authors.png";
 import Dessert from "../assets/images/dessert.png";
 import Mussels from "../assets/images/mussels2.png";
+import RestaurantInterior from "../assets/images/gallery/pexels-pixabay-262978.jpg";
 ---
 
 <Layout title="Home" pageTitle="Home" description="Welcome to our restaurant!">
@@ -64,6 +65,7 @@ import Mussels from "../assets/images/mussels2.png";
     image={DecorativeImage}
     alt="Italian dining atmosphere with rustic decor"
     class:list={"aspect-video lg:aspect-16/6"}
+    loading="eager"
   />
 
   <Section>
@@ -87,11 +89,11 @@ import Mussels from "../assets/images/mussels2.png";
             alt="Wood-fired margherita pizza with fresh basil"
             loading="lazy"
           />
-          <h3 class="h4 mt-0 font-black text-primary">Pasta &amp; Spaghetti</h3>
+          <h3 class="h4 mt-0 font-black text-primary">Classic Pizzas</h3>
           <p class="text-secondary">
-            Pasta is a staple of Italian cuisine, with a rich history dating
-            back centuries. It comes in various shapes and sizes, each suited to
-            different sauces and preparations.
+            Our wood-fired pizzas are made with hand-stretched dough, San Marzano
+            tomatoes, and imported Italian cheeses. From classic Margherita to
+            our signature house specials, every pie is a masterpiece.
           </p>
         </div>
       </div>
@@ -105,11 +107,11 @@ import Mussels from "../assets/images/mussels2.png";
             alt="Homemade spaghetti with rich tomato sauce and parmesan"
             loading="lazy"
           />
-          <h3 class="h4 mt-0 font-black text-primary">Pasta &amp; Spaghetti</h3>
+          <h3 class="h4 mt-0 font-black text-primary">Homemade Pastas</h3>
           <p class="text-secondary">
-            Pasta is a staple of Italian cuisine, with a rich history dating
-            back centuries. It comes in various shapes and sizes, each suited to
-            different sauces and preparations.
+            Our pasta is made fresh daily using traditional Italian recipes passed
+            down through generations. Each dish is crafted with love and served
+            with our signature sauces.
           </p>
         </div>
       </div>
@@ -118,16 +120,16 @@ import Mussels from "../assets/images/mussels2.png";
         <div class="flex flex-col items-center prose text-center">
           <Picture
             class:list={"not-prose w-full h-auto"}
-            src={Fish}
+            src={Chicken}
             formats={["avif", "webp"]}
-            alt="Grilled Mediterranean fish with herbs and lemon"
+            alt="Herb-roasted chicken served with seasonal vegetables"
             loading="lazy"
           />
-          <h3 class="h4 mt-0 font-black text-primary">Pasta &amp; Spaghetti</h3>
+          <h3 class="h4 mt-0 font-black text-primary">Savory Entrées</h3>
           <p class="text-secondary">
-            Pasta is a staple of Italian cuisine, with a rich history dating
-            back centuries. It comes in various shapes and sizes, each suited to
-            different sauces and preparations.
+            From succulent herb-roasted poultry to fresh seafood, our entrées
+            showcase the best of Italian cooking. Each dish features premium
+            ingredients and bold Mediterranean flavors.
           </p>
         </div>
       </div>
@@ -311,11 +313,11 @@ import Mussels from "../assets/images/mussels2.png";
 
       <div slot="hero-content-right">
         <Picture
-          class:list={"mx-auto"}
-          src={Dessert}
+          class:list={"mx-auto rounded-xl"}
+          src={RestaurantInterior}
           height={600}
           formats={["avif", "webp"]}
-          alt="Decadent chocolate dessert with fresh berries"
+          alt="Cozy restaurant interior with warm lighting and rustic decor"
           loading="lazy"
         />
       </div>

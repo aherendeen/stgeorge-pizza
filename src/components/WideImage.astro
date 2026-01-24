@@ -1,6 +1,12 @@
 ---
 import { Picture } from "astro:assets";
-const { image, alt, class: className, loading = "lazy" } = Astro.props;
+const { image, alt, class: className, loading = "lazy", fetchpriority } = Astro.props;
 ---
 
-<Picture src={image} alt={alt} loading={loading} class:list={[className, "object-cover object-center w-full"]} />
+<Picture 
+  src={image} 
+  alt={alt} 
+  loading={loading} 
+  fetchpriority={loading === "eager" ? "high" : fetchpriority}
+  class:list={[className, "object-cover object-center w-full"]} 
+/>

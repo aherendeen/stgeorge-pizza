@@ -2,25 +2,29 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<div
-	x-data="themeToggle()"
-	x-init="init()"
-	class="relative"
->
+<div x-data="themeToggle()" x-init="init()">
 	<button
 		@click="toggle()"
 		type="button"
-		class="p-2 rounded-full transition-colors duration-200 hover:bg-(--color-bg-tertiary) focus:outline-none focus:ring-2 focus:ring-(--color-accent)"
+		class="theme-toggle p-2.5 rounded-lg transition-all duration-200 hover:bg-tertiary text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 ring-accent"
 		:aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+		:title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
 	>
 		<span x-show="!isDark" x-cloak>
-			<Icon name="lucide:moon" class="size-5 text-(--color-text-primary)" />
+			<Icon name="lucide:moon" class="size-5" aria-hidden="true" />
 		</span>
 		<span x-show="isDark" x-cloak>
-			<Icon name="lucide:sun" class="size-5 text-(--color-text-primary)" />
+			<Icon name="lucide:sun" class="size-5" aria-hidden="true" />
 		</span>
 	</button>
 </div>
+
+<style>
+	.theme-toggle:focus-visible {
+		--tw-ring-offset-width: 2px;
+		--tw-ring-offset-color: var(--color-bg-primary);
+	}
+</style>
 
 <script>
 	document.addEventListener("alpine:init", () => {
@@ -29,7 +33,6 @@ import { Icon } from "astro-icon/components";
 			isDark: false,
 
 			init() {
-				// Check localStorage first, then system preference
 				const stored = localStorage.getItem("theme");
 				if (stored) {
 					this.isDark = stored === "dark";
@@ -38,7 +41,6 @@ import { Icon } from "astro-icon/components";
 				}
 				this.applyTheme();
 
-				// Listen for system theme changes
 				window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
 					if (!localStorage.getItem("theme")) {
 						this.isDark = e.matches;
@@ -54,11 +56,7 @@ import { Icon } from "astro-icon/components";
 			},
 
 			applyTheme() {
-				if (this.isDark) {
-					document.documentElement.classList.add("dark");
-				} else {
-					document.documentElement.classList.remove("dark");
-				}
+				document.documentElement.classList.toggle("dark", this.isDark);
 			},
 		}));
 	});

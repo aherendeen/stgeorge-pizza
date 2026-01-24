@@ -1,7 +1,7 @@
 // Global variables
 export const siteLang = "en-US";
 export const siteCurrency = "USD";
-export const siteDomain = "localhost:4321";
+export const siteDomain = "stgeorge-pizza.vercel.app";
 export const siteName = "St. George Pizza";
 export const siteSlogan = "The best pies in St. George!";
 
@@ -12,7 +12,7 @@ export const phone = {
 
 export const email = {
 	href: "#",
-	label: "hello@stgeorgepizza.local",
+	label: "hello@stgeorgepizza.com",
 };
 
 export const address = {

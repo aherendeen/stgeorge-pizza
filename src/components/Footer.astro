@@ -1,48 +1,90 @@
 ---
 import { Icon } from "astro-icon/components";
 import { menuMain } from "../data/menus";
-import { siteName, socialMedia } from "../data/config";
+import { siteName, siteDomain, socialMedia, address, phone, email, hours } from "../data/config";
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-tertiary border-t border-border">
-  <div class="container pt-16 pb-8">
-    <p class="text-center font-bold text-4xl text-primary">
-      St. George<span class="text-accent bg-accent/10 px-3 ml-1 rounded-lg"
-        >Pizza</span
-      >
-    </p>
-    <nav
-      class="flex flex-col sm:flex-row items-center justify-center gap-x-12 gap-y-3 font-medium mt-6"
-      aria-label="Footer"
-    >
-      {
-        menuMain.map((item) => (
-          <a href={item.url} class="text-secondary hover:text-primary transition">
-            {item.name}
-          </a>
-        ))
-      }
-    </nav>
-    <div class="flex items-center justify-center gap-6 mt-8">
-      {
-        Object.values(socialMedia).map((social) => (
-          <a
-            href={social.url}
-            class="text-muted hover:text-primary transition"
-            aria-label={social.label}
-          >
-            <Icon name={social.icon} class="size-5" />
-          </a>
-        ))
-      }
+<footer class="bg-secondary border-t border-border">
+  <div class="container py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <a href="/" class="inline-block">
+          <span class="font-bold text-2xl text-primary">
+            St. George<span class="text-accent bg-accent-subtle px-2 py-0.5 ml-1 rounded-lg">Pizza</span>
+          </span>
+        </a>
+        <p class="mt-4 text-secondary text-sm leading-relaxed">
+          Authentic Italian cuisine in the heart of St. George, Utah. Family-owned since 1998.
+        </p>
+        <div class="flex items-center gap-4 mt-6">
+          {Object.values(socialMedia).map((social) => (
+            <a
+              href={social.url}
+              class="text-muted hover:text-accent transition-colors p-2 rounded-lg hover:bg-tertiary"
+              aria-label={social.label}
+            >
+              <Icon name={social.icon} class="size-5" />
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <div>
+        <h3 class="font-semibold text-primary text-sm uppercase tracking-wider mb-4">Navigation</h3>
+        <nav class="space-y-3" aria-label="Footer">
+          {menuMain.map((item) => (
+            <a href={item.url} class="block text-secondary hover:text-accent transition-colors text-sm">
+              {item.name}
+            </a>
+          ))}
+        </nav>
+      </div>
+      
+      <!-- Contact -->
+      <div>
+        <h3 class="font-semibold text-primary text-sm uppercase tracking-wider mb-4">Contact</h3>
+        <div class="space-y-3 text-sm">
+          <p class="text-secondary">
+            {address.street}<br />
+            {address.city}, {address.state} {address.zip}
+          </p>
+          <p class="text-secondary">{phone.label}</p>
+          <p class="text-secondary">{email.label}</p>
+        </div>
+      </div>
+      
+      <!-- Hours -->
+      <div>
+        <h3 class="font-semibold text-primary text-sm uppercase tracking-wider mb-4">Hours</h3>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between text-secondary">
+            <span>Mon - Thu</span>
+            <span>{hours.monday}</span>
+          </div>
+          <div class="flex justify-between text-secondary">
+            <span>Fri - Sat</span>
+            <span>{hours.friday}</span>
+          </div>
+          <div class="flex justify-between text-secondary">
+            <span>Sunday</span>
+            <span>{hours.sunday}</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="mt-8 text-center text-sm text-muted">
-      &copy; {currentYear}
-      {siteName}. All rights reserved. <a
-        class="underline hover:text-primary transition"
-        href="/privacy-policy">Privacy</a
-      >
-    </p>
+    
+    <div class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-muted">
+        &copy; {currentYear} {siteName}. All rights reserved.
+      </p>
+      <div class="flex items-center gap-6 text-sm">
+        <a class="text-muted hover:text-accent transition-colors" href="/privacy-policy">Privacy Policy</a>
+        <span class="text-border">|</span>
+        <span class="text-muted">{siteDomain}</span>
+      </div>
+    </div>
   </div>
 </footer>

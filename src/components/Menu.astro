@@ -8,16 +8,19 @@ const siteLangFormat = siteLang.replace("_", "-");
 ---
 
 <!-- Quick Nav -->
-<div id="plate-nav-wrapper" class="mb-20 sticky top-8 z-10">
-  <nav class="bg-tertiary border border-border sm:rounded-full max-w-5xl mx-auto">
+<div id="plate-nav-wrapper" class="mb-12 lg:mb-16 sticky top-16 z-30">
+  <nav class="menu-nav bg-secondary border border-border rounded-lg max-w-4xl mx-auto shadow-card">
     <div class="swiper-plates w-auto overflow-hidden">
-      <ul id="plate-nav" class="px-2.5 py-3 swiper-wrapper">
+      <ul id="plate-nav" class="px-2 py-2 swiper-wrapper">
         {
-          plates.map((plate: Plate) => (
-            <li class="swiper-slide w-auto! last:mr-5">
+          plates.map((plate: Plate, index: number) => (
+            <li class="swiper-slide w-auto! last:mr-4">
               <a
                 href={`#${plate.data.slug}`}
-                class="rounded-full px-2 py-1 transition font-medium select-none text-secondary"
+                class:list={[
+                  "menu-nav-link block rounded-lg px-4 py-2 transition-all duration-200 font-medium select-none",
+                  index === 0 ? "menu-nav-active" : "text-secondary hover:text-primary hover:bg-tertiary"
+                ]}
                 data-category-link={plate.data.slug}
               >
                 {plate.data.prettyName}
@@ -30,29 +33,29 @@ const siteLangFormat = siteLang.replace("_", "-");
   </nav>
 </div>
 
-<div class="grid grid-cols-1 gap-y-32">
+<div class="grid grid-cols-1 gap-y-20 lg:gap-y-24">
   {
     plates.map((plate: Plate) => (
       <div
         id={plate.data.slug}
-        class="space-y-16 scroll-mt-20"
+        class="space-y-8 scroll-mt-28"
         data-category-section={plate.data.slug}
       >
         <div class="flex flex-col items-center gap-2 max-w-lg mx-auto text-balance text-center">
-          <h3 class="h4 text-muted">{plate.data.prettyName}</h3>
+          <h3 class="text-2xl md:text-3xl font-bold text-primary">{plate.data.prettyName}</h3>
           <p class="text-secondary">{plate.data.description}</p>
         </div>
 
-        <dl class="max-w-5xl mx-auto">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-x-16 xl:gap-x-32">
+        <dl class="max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             {plate.data.plates.map((item: PlateItem) => (
-              <div>
+              <div class="group p-4 rounded-lg border border-border bg-secondary transition-all hover:shadow-card">
                 <dt>
-                  <div class="flex justify-between items-center">
-                    <span class="font-bold text-2xl tracking-wide text-primary">
+                  <div class="flex justify-between items-baseline gap-4">
+                    <span class="font-semibold text-lg text-primary">
                       {item.name}
                     </span>
-                    <span class="font-medium text-lg text-accent">
+                    <span class="font-bold text-lg text-accent shrink-0">
                       {new Intl.NumberFormat(siteLangFormat, {
                         style: "currency",
                         currency: siteCurrency,
@@ -61,7 +64,7 @@ const siteLangFormat = siteLang.replace("_", "-");
                   </div>
                 </dt>
                 <dd>
-                  <p class="mt-2 text-muted tracking-wide leading-normal text-balance">
+                  <p class="mt-1 text-muted text-sm leading-relaxed">
                     {item.description}
                   </p>
                 </dd>
@@ -75,17 +78,26 @@ const siteLangFormat = siteLang.replace("_", "-");
 </div>
 
 <style>
-  @media screen and (min-width: 0px) and (max-width: 640px) {
+  @media screen and (max-width: 640px) {
     #plate-nav-wrapper {
-      /* position: relative; */
-      right: 0;
-      left: 0;
-      top: 0;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      max-width: 100vw;
-      width: 100vw;
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+      max-width: calc(100% + 3rem);
     }
+    .menu-nav {
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+    }
+  }
+  
+  .menu-nav-active {
+    background-color: var(--color-accent);
+    color: var(--color-surface-950);
+  }
+  .menu-nav-active:hover {
+    background-color: var(--color-accent-hover);
+    color: var(--color-surface-950);
   }
 </style>
 
@@ -93,110 +105,77 @@ const siteLangFormat = siteLang.replace("_", "-");
   import Swiper from "swiper";
   import "swiper/css";
 
-  document.addEventListener("astro:page-load", () => {
-    const swiperPlates = document.querySelector(
-      ".swiper-plates"
-    ) as HTMLElement;
-    const swiper = new Swiper(swiperPlates, {
+  function initMenuSwiper() {
+    const swiperEl = document.querySelector(".swiper-plates") as HTMLElement;
+    if (!swiperEl) return;
+
+    const swiper = new Swiper(swiperEl, {
       loop: false,
-      spaceBetween: 32,
+      spaceBetween: 8,
       slidesPerView: "auto",
+      freeMode: true,
     });
 
-    // Setup category highlighting
     const categoryLinks = document.querySelectorAll("[data-category-link]");
-    const categorySections = document.querySelectorAll(
-      "[data-category-section]"
-    );
-    let activeLink: Element | null = null;
-    let isNavigatingByClick = false; // Flag to track click-based navigation
+    const categorySections = document.querySelectorAll("[data-category-section]");
+    let isNavigatingByClick = false;
 
-    // Add hover effect to all links initially
-    categoryLinks.forEach((link) => {
-      link.classList.add("hover:bg-surface-200", "dark:hover:bg-surface-700");
-    });
-
-    // Function to set active category
     function setActiveCategory(id: string) {
-      // Remove active classes and restore hover effect to all links
       categoryLinks.forEach((link) => {
-        link.classList.remove("bg-accent", "text-white");
-        link.classList.add("hover:bg-surface-200", "dark:hover:bg-surface-700", "text-secondary");
+        link.classList.remove("menu-nav-active");
+        link.classList.add("text-secondary", "hover:text-primary", "hover:bg-tertiary");
       });
 
-      // Add active classes to current link and remove hover effect
-      const currentLink = document.querySelector(
-        `[data-category-link="${id}"]`
-      );
+      const currentLink = document.querySelector(`[data-category-link="${id}"]`);
       if (currentLink) {
-        currentLink.classList.add("bg-accent", "text-white");
-        currentLink.classList.remove("hover:bg-surface-200", "dark:hover:bg-surface-700", "text-secondary");
-        activeLink = currentLink;
-
-        // Slide to make the active link visible if needed
+        currentLink.classList.add("menu-nav-active");
+        currentLink.classList.remove("text-secondary", "hover:text-primary", "hover:bg-tertiary");
+        
         const linkIndex = Array.from(categoryLinks).indexOf(currentLink);
         if (linkIndex !== -1) {
-          swiper.slideTo(linkIndex);
+          swiper.slideTo(Math.max(0, linkIndex - 1));
         }
       }
     }
 
-    // Set active category on click
     categoryLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
+      link.addEventListener("click", () => {
         const targetId = (link as HTMLElement).dataset.categoryLink;
         if (targetId) {
-          // Set flag to ignore intersection events during programmatic scrolling
           isNavigatingByClick = true;
           setActiveCategory(targetId);
-
-          // Reset flag after scrolling animation completes
-          setTimeout(() => {
-            isNavigatingByClick = false;
-          }, 1000); // Adjust timeout based on your scroll duration
+          setTimeout(() => { isNavigatingByClick = false; }, 800);
         }
       });
     });
 
-    // Set active category on scroll
     const observer = new IntersectionObserver(
       (entries) => {
-        // Skip processing if we're navigating via click
         if (isNavigatingByClick) return;
-
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const sectionId = (entry.target as HTMLElement).dataset
-              .categorySection;
-            if (sectionId) {
-              setActiveCategory(sectionId);
-            }
+            const sectionId = (entry.target as HTMLElement).dataset.categorySection;
+            if (sectionId) setActiveCategory(sectionId);
           }
         });
       },
-      { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
+      { rootMargin: "-25% 0px -55% 0px", threshold: 0 }
     );
 
-    // Observe all category sections
-    categorySections.forEach((section) => {
-      observer.observe(section);
-    });
+    categorySections.forEach((section) => observer.observe(section));
 
-    // Set initial active category based on hash or first category
-    const setInitialActiveCategory = () => {
-      if (window.location.hash) {
-        const id = window.location.hash.substring(1);
-        setActiveCategory(id);
-      } else if (categorySections.length > 0) {
-        const firstSectionId = (categorySections[0] as HTMLElement).dataset
-          .categorySection;
-        if (firstSectionId) {
-          setActiveCategory(firstSectionId);
-        }
-      }
-    };
+    // Set initial
+    if (window.location.hash) {
+      setActiveCategory(window.location.hash.substring(1));
+    } else if (categorySections.length > 0) {
+      const firstId = (categorySections[0] as HTMLElement).dataset.categorySection;
+      if (firstId) setActiveCategory(firstId);
+    }
+  }
 
-    // Set initial active category
-    setInitialActiveCategory();
-  });
+  // Initialize on page load and on Astro navigation
+  document.addEventListener("astro:page-load", initMenuSwiper);
+  if (document.readyState === "complete") {
+    initMenuSwiper();
+  }
 </script>

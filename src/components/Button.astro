@@ -1,12 +1,24 @@
 ---
-const { color = "primary", url = "", newtab = false, As = "a", ...props } = Astro.props;
+interface Props {
+	color?: "primary" | "secondary" | "outline";
+	url?: string;
+	newtab?: boolean;
+	As?: "a" | "button";
+	class?: string;
+}
+
+const { color = "primary", url = "", newtab = false, As = "a", class: className = "", ...props } = Astro.props;
 ---
 
 <As
-	class={`not-prose button button-${color}`}
-	href={url}
-	target={newtab ? "_blank" : "_self"}
-	rel={newtab ? "noopener noreferrer" : ""}
+	class:list={[
+		"not-prose button",
+		`button-${color}`,
+		className
+	]}
+	href={As === "a" ? url : undefined}
+	target={As === "a" && newtab ? "_blank" : undefined}
+	rel={As === "a" && newtab ? "noopener noreferrer" : undefined}
 	{...props}
 >
 	<slot />

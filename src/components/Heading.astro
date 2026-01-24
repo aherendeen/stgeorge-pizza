@@ -1,12 +1,21 @@
 ---
-
+interface Props {
+	align?: "left" | "center";
+	class?: string;
+}
+const { align = "center", class: className = "" } = Astro.props;
 ---
 
-<div class="mx-auto max-w-2xl text-center prose mb-20">
-	<Fragment>
+<div class:list={[
+	"max-w-2xl prose mb-16 lg:mb-20",
+	align === "center" && "mx-auto text-center",
+	align === "left" && "text-left",
+	className
+]}>
+	<div>
 		<slot name="heading-title" />
-	</Fragment>
-	<Fragment>
+	</div>
+	<div class="text-secondary">
 		<slot name="heading-content" />
-	</Fragment>
+	</div>
 </div>

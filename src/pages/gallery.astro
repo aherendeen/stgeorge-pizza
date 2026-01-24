@@ -2,54 +2,84 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import Heading from "../components/Heading.astro";
-import { Picture } from "astro:assets";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import type { Gallery } from "../types";
 
 const gallery: Gallery[] = await getCollection("gallery");
 ---
 
-<Layout>
-  <Section class:list={"[&>.container]:pb-0"}>
+<Layout pageTitle="Gallery" title="Gallery" description="Browse photos from our restaurant and food">
+  <Section padding="md">
     <Heading>
-      <h1 slot="heading-title" class="font-black text-primary h2">
+      <h1 slot="heading-title" class="font-bold text-primary h2">
         Gallery
       </h1>
       <p slot="heading-content" class="text-secondary">
-        Get a feel of our restaurant and food through our gallery. We promise a
-        memorable culinary experience.
+        Get a feel of our restaurant and food through our gallery.
       </p>
     </Heading>
   </Section>
-  <div class="masonry-grid grid grid-cols-2 lg:grid-cols-3 pb-16 lg:pb-32">
-    {
-      gallery.map((item, index: number) => (
-        <div class="masonry-grid-item">
-          <a href={item.data.image.src} class="glightbox">
-            <Picture
+  
+  <div class="container pb-16 lg:pb-24">
+    <div class="gallery-grid grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+      {
+        gallery.map((item, index: number) => (
+          <a 
+            href={item.data.image.src} 
+            class="gallery-item block overflow-hidden rounded-lg bg-tertiary aspect-square group"
+            data-glightbox
+            data-gallery="gallery"
+            data-alt={item.data.alt}
+          >
+            <Image
               src={item.data.image}
               alt={item.data.alt}
-              class="h-full w-full object-cover object-center"
-              loading={index < 3 ? "eager" : "lazy"}
-              fetchpriority={index < 3 ? "high" : "auto"}
+              width={400}
+              height={400}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading={index < 6 ? "eager" : "lazy"}
+              decoding={index < 6 ? "sync" : "async"}
             />
           </a>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
   </div>
 </Layout>
 
+<style>
+  .gallery-item {
+    position: relative;
+  }
+  .gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery-item:hover::after {
+    opacity: 1;
+  }
+</style>
+
 <script>
   import GLightbox from "glightbox";
-  import "../../node_modules/glightbox/dist/css/glightbox.min.css";
+  import "glightbox/dist/css/glightbox.min.css";
 
-  document.addEventListener("astro:page-load", () => {
-    const lightbox = GLightbox({
+  function initLightbox() {
+    GLightbox({
+      selector: "[data-glightbox]",
       touchNavigation: true,
-      autoplayVideos: true,
       loop: true,
-      draggable: true,
+      closeOnOutsideClick: true,
     });
-  });
+  }
+
+  document.addEventListener("astro:page-load", initLightbox);
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    initLightbox();
+  }
 </script>

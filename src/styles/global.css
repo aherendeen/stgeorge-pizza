@@ -4,63 +4,106 @@
 @theme {
 	--font-inter: "Inter", "sans-serif";
 	
-	--color-surface-50: #fafafa;
-	--color-surface-100: #f5f5f5;
-	--color-surface-200: #e5e5e5;
-	--color-surface-300: #d4d4d4;
-	--color-surface-400: #a3a3a3;
-	--color-surface-500: #737373;
-	--color-surface-600: #525252;
-	--color-surface-700: #404040;
-	--color-surface-800: #262626;
-	--color-surface-900: #171717;
-	--color-surface-950: #0a0a0a;
+	/* Neutral surface scale - warm stone grays */
+	--color-surface-50: #fafaf9;
+	--color-surface-100: #f5f5f4;
+	--color-surface-200: #e7e5e4;
+	--color-surface-300: #d6d3d1;
+	--color-surface-400: #a8a29e;
+	--color-surface-500: #78716c;
+	--color-surface-600: #57534e;
+	--color-surface-700: #44403c;
+	--color-surface-800: #292524;
+	--color-surface-900: #1c1917;
+	--color-surface-950: #0c0a09;
 	
-	--color-accent-500: #059669;
-	--color-accent-600: #047857;
-	--color-accent-700: #065f46;
+	/* Warm copper/amber accent - Italian warmth */
+	--color-accent-400: #f59e0b;
+	--color-accent-500: #d97706;
+	--color-accent-600: #b45309;
+	--color-accent-700: #92400e;
 	
-	--color-secondary-500: #dc2626;
-	--color-secondary-600: #b91c1c;
+	/* Deep red secondary - classic Italian */
+	--color-secondary-400: #f87171;
+	--color-secondary-500: #ef4444;
+	--color-secondary-600: #dc2626;
 }
 
 :root {
-	--color-bg-primary: var(--color-surface-50);
-	--color-bg-secondary: #ffffff;
+	--color-bg-primary: #ffffff;
+	--color-bg-secondary: var(--color-surface-50);
 	--color-bg-tertiary: var(--color-surface-100);
+	--color-bg-elevated: #ffffff;
 	--color-bg-inverse: var(--color-surface-900);
+	
 	--color-text-primary: var(--color-surface-900);
 	--color-text-secondary: var(--color-surface-600);
 	--color-text-tertiary: var(--color-surface-500);
+	--color-text-muted: var(--color-surface-400);
 	--color-text-inverse: #ffffff;
+	
 	--color-border-primary: var(--color-surface-200);
 	--color-border-secondary: var(--color-surface-300);
+	--color-border-focus: var(--color-accent-500);
+	
 	--color-accent: var(--color-accent-600);
 	--color-accent-hover: var(--color-accent-700);
+	--color-accent-light: var(--color-accent-400);
+	--color-accent-subtle: color-mix(in srgb, var(--color-accent-500) 12%, transparent);
+	
 	--color-secondary: var(--color-secondary-500);
 	--color-secondary-hover: var(--color-secondary-600);
+	--color-secondary-subtle: color-mix(in srgb, var(--color-secondary-500) 12%, transparent);
+	
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+	--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+	--shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+	--shadow-card-hover: 0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.04);
 }
 
 .dark {
 	--color-bg-primary: var(--color-surface-950);
 	--color-bg-secondary: var(--color-surface-900);
 	--color-bg-tertiary: var(--color-surface-800);
+	--color-bg-elevated: var(--color-surface-900);
 	--color-bg-inverse: var(--color-surface-100);
-	--color-text-primary: var(--color-surface-100);
+	
+	--color-text-primary: var(--color-surface-50);
 	--color-text-secondary: var(--color-surface-300);
 	--color-text-tertiary: var(--color-surface-400);
+	--color-text-muted: var(--color-surface-500);
 	--color-text-inverse: var(--color-surface-900);
+	
 	--color-border-primary: var(--color-surface-800);
 	--color-border-secondary: var(--color-surface-700);
-	--color-accent: var(--color-accent-500);
-	--color-accent-hover: var(--color-accent-600);
-	--color-secondary: var(--color-secondary-500);
-	--color-secondary-hover: var(--color-secondary-600);
+	--color-border-focus: var(--color-accent-400);
+	
+	--color-accent: var(--color-accent-400);
+	--color-accent-hover: var(--color-accent-500);
+	--color-accent-light: var(--color-accent-400);
+	--color-accent-subtle: color-mix(in srgb, var(--color-accent-400) 15%, transparent);
+	
+	--color-secondary: var(--color-secondary-400);
+	--color-secondary-hover: var(--color-secondary-500);
+	--color-secondary-subtle: color-mix(in srgb, var(--color-secondary-400) 15%, transparent);
+	
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+	--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+	--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+	--shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.15), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+	--shadow-card-hover: 0 4px 12px -2px rgb(0 0 0 / 0.2), 0 2px 6px -2px rgb(0 0 0 / 0.1);
 }
 
+/* Container with max-width */
 @utility container {
 	margin-inline: auto;
-	padding-inline: 2rem;
+	padding-inline: 1.5rem;
+	max-width: 80rem;
+	
+	@media (min-width: 640px) {
+		padding-inline: 2rem;
+	}
 }
 
 @utility prose {
@@ -80,27 +123,39 @@
 		h6 { font-size: var(--text-xl); }
 	}
 
-	pre { background-color: transparent; }
-	p { font-size: var(--text-lg); line-height: var(--leading-relaxed); }
-	li { font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+	pre { background-color: var(--color-bg-tertiary); border-radius: 0.5rem; padding: 1rem; }
+	p { font-size: var(--text-lg); line-height: 1.75; }
+	li { font-size: var(--text-lg); line-height: 1.75; }
 	hr { border-color: var(--color-border-primary); }
-	a { color: var(--color-text-primary); &:hover { text-decoration: underline; } }
-	strong { font-weight: 700; }
-	img { width: 100%; }
+	/* Only style text links, not buttons */
+	a:not(.button):not(.not-prose) { 
+		color: var(--color-accent); 
+		text-decoration: underline; 
+		text-underline-offset: 3px; 
+		&:hover { color: var(--color-accent-hover); } 
+	}
+	strong { font-weight: 700; color: var(--color-text-primary); }
+	img { width: 100%; border-radius: 0.75rem; }
+	blockquote { 
+		border-left: 4px solid var(--color-accent); 
+		padding-left: 1.5rem; 
+		font-style: italic; 
+		color: var(--color-text-secondary);
+	}
 
 	--tw-prose-body: var(--color-text-secondary);
 	--tw-prose-headings: var(--color-text-primary);
 	--tw-prose-lead: var(--color-text-secondary);
-	--tw-prose-links: var(--color-text-primary);
+	--tw-prose-links: var(--color-accent);
 	--tw-prose-bold: var(--color-text-primary);
-	--tw-prose-counters: var(--color-text-tertiary);
-	--tw-prose-bullets: var(--color-text-tertiary);
+	--tw-prose-counters: var(--color-text-muted);
+	--tw-prose-bullets: var(--color-accent);
 	--tw-prose-hr: var(--color-border-primary);
 	--tw-prose-quotes: var(--color-text-primary);
-	--tw-prose-quote-borders: var(--color-border-secondary);
+	--tw-prose-quote-borders: var(--color-accent);
 	--tw-prose-captions: var(--color-text-secondary);
 	--tw-prose-code: var(--color-text-primary);
-	--tw-prose-pre-code: var(--color-text-inverse);
+	--tw-prose-pre-code: var(--color-text-primary);
 	--tw-prose-pre-bg: var(--color-bg-tertiary);
 	--tw-prose-th-borders: var(--color-border-secondary);
 	--tw-prose-td-borders: var(--color-border-primary);
@@ -120,84 +175,212 @@ h1, h2, h3, h4, h5, h6 {
 	color: var(--color-text-primary);
 }
 
-h1, .h1 { @apply text-5xl lg:text-7xl; }
-h2, .h2 { @apply text-5xl lg:text-6xl; }
-h3, .h3 { @apply text-4xl lg:text-5xl; }
-h4, .h4 { @apply text-3xl lg:text-4xl; }
-h5, .h5 { @apply text-2xl lg:text-3xl; }
-h6, .h6 { @apply text-xl lg:text-2xl; }
+h1, .h1 { @apply text-4xl sm:text-5xl lg:text-7xl tracking-tight; }
+h2, .h2 { @apply text-3xl sm:text-4xl lg:text-6xl tracking-tight; }
+h3, .h3 { @apply text-2xl sm:text-3xl lg:text-5xl; }
+h4, .h4 { @apply text-xl sm:text-2xl lg:text-4xl; }
+h5, .h5 { @apply text-lg sm:text-xl lg:text-3xl; }
+h6, .h6 { @apply text-base sm:text-lg lg:text-2xl; }
 
 p { @apply leading-relaxed; color: var(--color-text-secondary); }
 
+/* Buttons - solid foundation with proper styling */
 .button {
-	@apply rounded-full px-4 py-3 text-base transition duration-300 font-bold shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2;
+	@apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-semibold;
+	@apply transition-all duration-200 no-underline;
+	@apply border-2 border-transparent;
+	@apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+	box-shadow: var(--shadow-sm);
 }
 
-.button-primary { background-color: var(--color-accent); color: var(--color-text-inverse); }
-.button-primary:hover { background-color: var(--color-accent-hover); }
-.button-primary:focus-visible { outline-color: var(--color-accent); }
+.button-primary { 
+	background-color: var(--color-accent); 
+	color: var(--color-surface-950);
+	border-color: var(--color-accent);
+}
+.button-primary:hover { 
+	background-color: var(--color-accent-hover); 
+	border-color: var(--color-accent-hover);
+	box-shadow: var(--shadow-md);
+	color: var(--color-surface-950);
+	text-decoration: none;
+}
+.button-primary:focus-visible { 
+	--tw-ring-color: var(--color-accent);
+	--tw-ring-offset-color: var(--color-bg-primary);
+}
 
-.button-secondary { background-color: var(--color-secondary); color: var(--color-text-inverse); }
-.button-secondary:hover { background-color: var(--color-secondary-hover); }
-.button-secondary:focus-visible { outline-color: var(--color-secondary); }
+.button-secondary { 
+	background-color: var(--color-secondary); 
+	color: white;
+	border-color: var(--color-secondary);
+}
+.button-secondary:hover { 
+	background-color: var(--color-secondary-hover);
+	border-color: var(--color-secondary-hover);
+	box-shadow: var(--shadow-md);
+	color: white;
+	text-decoration: none;
+}
+.button-secondary:focus-visible { 
+	--tw-ring-color: var(--color-secondary);
+	--tw-ring-offset-color: var(--color-bg-primary);
+}
 
 .button-outline {
 	background-color: transparent;
-	border: 2px solid var(--color-border-secondary);
+	border-color: var(--color-border-secondary);
 	color: var(--color-text-primary);
+	box-shadow: none;
 }
-.button-outline:hover { background-color: var(--color-bg-tertiary); border-color: var(--color-text-primary); }
+.button-outline:hover { 
+	background-color: var(--color-bg-tertiary); 
+	border-color: var(--color-text-primary);
+	text-decoration: none;
+}
 
-.button-green { background-color: var(--color-accent); color: var(--color-text-inverse); }
-.button-green:hover { background-color: var(--color-accent-hover); }
-.button-green:focus-visible { outline-color: var(--color-accent); }
+/* Dark mode button adjustments */
+.dark .button-primary {
+	color: var(--color-surface-950);
+}
+.dark .button-primary:focus-visible {
+	--tw-ring-offset-color: var(--color-bg-primary);
+}
+.dark .button-secondary:focus-visible {
+	--tw-ring-offset-color: var(--color-bg-primary);
+}
 
-.button-red { background-color: var(--color-secondary); color: var(--color-text-inverse); }
-.button-red:hover { background-color: var(--color-secondary-hover); }
-.button-red:focus-visible { outline-color: var(--color-secondary); }
+/* Legacy button classes for compatibility */
+.button-green { 
+	background-color: var(--color-accent); 
+	color: var(--color-surface-950);
+	border-color: var(--color-accent);
+}
+.button-green:hover { 
+	background-color: var(--color-accent-hover);
+	border-color: var(--color-accent-hover);
+	box-shadow: var(--shadow-md);
+	color: var(--color-surface-950);
+	text-decoration: none;
+}
+
+.button-red { 
+	background-color: var(--color-secondary); 
+	color: white;
+	border-color: var(--color-secondary);
+}
+.button-red:hover { 
+	background-color: var(--color-secondary-hover);
+	border-color: var(--color-secondary-hover);
+	box-shadow: var(--shadow-md);
+	color: white;
+	text-decoration: none;
+}
+
+/* Menu navigation */
+.menu-nav-active {
+	background-color: var(--color-accent);
+	color: var(--color-surface-950);
+	@apply px-4 py-2 rounded-lg;
+	box-shadow: var(--shadow-sm);
+}
+.menu-nav-active:hover { 
+	background-color: var(--color-accent-hover); 
+	color: var(--color-surface-950);
+}
 
 .menu-item-highlighted.menu-item-highlighted {
 	background-color: var(--color-accent);
-	color: var(--color-text-inverse);
-	@apply px-4 rounded-full py-1.5;
+	color: var(--color-surface-950);
+	@apply px-5 rounded-lg py-2;
+	box-shadow: var(--shadow-sm);
 }
-.menu-item-highlighted.menu-item-highlighted:hover { background-color: var(--color-accent-hover); color: var(--color-text-inverse); }
-.menu-item-active.menu-item-highlighted { color: var(--color-text-inverse); }
-.menu-item-active.menu-item-highlighted:hover { color: var(--color-text-inverse); }
-.menu-item-active:not(.menu-item-highlighted) { color: var(--color-accent); @apply font-bold; }
+.menu-item-highlighted.menu-item-highlighted:hover { 
+	background-color: var(--color-accent-hover); 
+	color: var(--color-surface-950);
+	box-shadow: var(--shadow-md);
+}
+.menu-item-active.menu-item-highlighted { color: var(--color-surface-950); }
+.menu-item-active.menu-item-highlighted:hover { color: var(--color-surface-950); }
+.menu-item-active:not(.menu-item-highlighted) { 
+	color: var(--color-accent); 
+	@apply font-bold;
+}
 
 [x-cloak] { display: none !important; }
 
+/* Background utilities */
 .bg-primary { background-color: var(--color-bg-primary); }
 .bg-secondary { background-color: var(--color-bg-secondary); }
 .bg-tertiary { background-color: var(--color-bg-tertiary); }
+.bg-elevated { background-color: var(--color-bg-elevated); }
 .bg-accent { background-color: var(--color-accent); }
-.bg-accent-subtle { background-color: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.bg-accent-subtle { background-color: var(--color-accent-subtle); }
 
+/* Text utilities */
 .text-primary { color: var(--color-text-primary); }
 .text-secondary { color: var(--color-text-secondary); }
 .text-tertiary { color: var(--color-text-tertiary); }
+.text-muted { color: var(--color-text-muted); }
 .text-accent { color: var(--color-accent); }
 
+/* Border utilities */
+.border-border { border-color: var(--color-border-primary); }
+.border-border-secondary { border-color: var(--color-border-secondary); }
+
+/* Ring utilities for focus states */
+.ring-accent { --tw-ring-color: var(--color-accent); }
+
+/* Adjacent section optimization */
 section.bg-secondary + section.bg-secondary > .container,
 section.bg-tertiary + section.bg-tertiary > .container,
 section.bg-accent + section.bg-accent > .container { @apply pt-0; }
 
-input, textarea {
-	background-color: var(--color-bg-secondary);
+/* Forms - improved accessibility */
+input, textarea, select {
+	background-color: var(--color-bg-primary);
 	border: 1px solid var(--color-border-primary);
 	color: var(--color-text-primary);
-	@apply rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2;
-	--tw-ring-color: var(--color-accent);
+	@apply rounded-lg px-4 py-3 w-full transition-all duration-200;
+	@apply focus:outline-none focus:ring-2 focus:border-transparent;
+	--tw-ring-color: var(--color-border-focus);
 }
-input::placeholder, textarea::placeholder { color: var(--color-text-tertiary); }
-label { @apply block text-sm/6 font-medium; color: var(--color-text-primary); }
+input:hover, textarea:hover, select:hover { 
+	border-color: var(--color-border-secondary);
+}
+input::placeholder, textarea::placeholder { color: var(--color-text-muted); }
+label { 
+	@apply block text-sm font-semibold mb-2; 
+	color: var(--color-text-primary); 
+}
 
-.swiper-pagination-bullet-active.swiper-pagination-bullet-active { background-color: var(--color-accent); }
+/* Dark mode form adjustments */
+.dark input, .dark textarea, .dark select {
+	background-color: var(--color-bg-tertiary);
+}
 
-.card { background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-primary); @apply rounded-xl shadow-sm; }
-.card:hover { border-color: var(--color-border-secondary); @apply shadow-md; }
+/* Swiper pagination */
+.swiper-pagination-bullet { 
+	background-color: var(--color-border-secondary);
+	opacity: 1;
+}
+.swiper-pagination-bullet-active.swiper-pagination-bullet-active { 
+	background-color: var(--color-accent);
+}
 
+/* Card component */
+.card { 
+	background-color: var(--color-bg-elevated); 
+	border: 1px solid var(--color-border-primary); 
+	@apply rounded-xl transition-all duration-200;
+	box-shadow: var(--shadow-card);
+}
+.card:hover { 
+	border-color: var(--color-border-secondary); 
+	box-shadow: var(--shadow-card-hover);
+}
+
+/* Divider */
 .divider { border-color: var(--color-border-primary); }
 
 @font-face { font-display: swap; font-family: "Inter"; font-style: normal; font-weight: 300; src: url("/fonts/inter/inter-v18-latin-300.woff2") format("woff2"); }

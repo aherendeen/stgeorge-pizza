@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://localhost:4321/</loc>
+    <loc>https://stgeorge-pizza.vercel.app/</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/about-us</loc>
+    <loc>https://stgeorge-pizza.vercel.app/about-us</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/api-status</loc>
+    <loc>https://stgeorge-pizza.vercel.app/api-status</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/book</loc>
+    <loc>https://stgeorge-pizza.vercel.app/book</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/contact</loc>
+    <loc>https://stgeorge-pizza.vercel.app/contact</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/gallery</loc>
+    <loc>https://stgeorge-pizza.vercel.app/gallery</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/menu</loc>
+    <loc>https://stgeorge-pizza.vercel.app/menu</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/pricing</loc>
+    <loc>https://stgeorge-pizza.vercel.app/pricing</loc>
   </url>
   <url>
-    <loc>https://localhost:4321/privacy-policy</loc>
+    <loc>https://stgeorge-pizza.vercel.app/privacy-policy</loc>
   </url>
 </urlset>

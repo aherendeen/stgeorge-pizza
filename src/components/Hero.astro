@@ -1,12 +1,20 @@
 ---
-
+interface Props {
+	reverse?: boolean;
+	class?: string;
+}
+const { reverse = false, class: className = "" } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:items-center">
-	<Fragment>
+<div class:list={[
+	"grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center",
+	reverse && "lg:[&>*:first-child]:order-2",
+	className
+]}>
+	<div>
 		<slot name="hero-content-left" />
-	</Fragment>
-	<Fragment>
+	</div>
+	<div>
 		<slot name="hero-content-right" />
-	</Fragment>
+	</div>
 </div>

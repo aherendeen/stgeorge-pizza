@@ -374,41 +374,71 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
 
 <script>
   // Mobile menu handler - works with View Transitions
-  function initMobileMenu() {
-    const menuBtn = document.querySelector('.header-menu-btn');
-    const closeBtn = document.querySelector('.header-close-btn');
-    const backdrop = document.querySelector('.header-mobile-backdrop');
-    const panel = document.querySelector('.header-mobile-panel');
-    const mobileLinks = document.querySelectorAll('.header-mobile-link');
-    const logoLink = document.querySelector('.header-mobile-header .header-logo');
+  // Use a global controller to prevent duplicate listeners
+  (function() {
+    let controller: AbortController | null = null;
     
-    function openMenu() {
-      backdrop?.classList.add('active');
-      panel?.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeMenu() {
+    function initMobileMenu() {
+      // Abort any previous listeners
+      if (controller) {
+        controller.abort();
+      }
+      controller = new AbortController();
+      const signal = controller.signal;
+      
+      const menuBtn = document.querySelector('.header-menu-btn') as HTMLElement | null;
+      const closeBtn = document.querySelector('.header-close-btn') as HTMLElement | null;
+      const backdrop = document.querySelector('.header-mobile-backdrop') as HTMLElement | null;
+      const panel = document.querySelector('.header-mobile-panel') as HTMLElement | null;
+      const mobileLinks = document.querySelectorAll('.header-mobile-link');
+      const logoLink = document.querySelector('.header-mobile-header .header-logo') as HTMLElement | null;
+      
+      // Ensure menu is closed on init
       backdrop?.classList.remove('active');
       panel?.classList.remove('active');
       document.body.style.overflow = '';
+      
+      function openMenu() {
+        if (backdrop && panel) {
+          backdrop.classList.add('active');
+          panel.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          menuBtn?.setAttribute('aria-expanded', 'true');
+        }
+      }
+      
+      function closeMenu() {
+        if (backdrop && panel) {
+          backdrop.classList.remove('active');
+          panel.classList.remove('active');
+          document.body.style.overflow = '';
+          menuBtn?.setAttribute('aria-expanded', 'false');
+        }
+      }
+      
+      // Attach listeners with abort signal to prevent duplicates
+      menuBtn?.addEventListener('click', openMenu, { signal });
+      closeBtn?.addEventListener('click', closeMenu, { signal });
+      backdrop?.addEventListener('click', closeMenu, { signal });
+      logoLink?.addEventListener('click', closeMenu, { signal });
+      mobileLinks.forEach(link => link.addEventListener('click', closeMenu, { signal }));
+      
+      // Close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      }, { signal });
     }
     
-    menuBtn?.addEventListener('click', openMenu);
-    closeBtn?.addEventListener('click', closeMenu);
-    backdrop?.addEventListener('click', closeMenu);
-    logoLink?.addEventListener('click', closeMenu);
-    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
-    
-    // Close on escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
+    // Close menu before page swap to prevent stuck state
+    document.addEventListener('astro:before-swap', () => {
+      const backdrop = document.querySelector('.header-mobile-backdrop');
+      const panel = document.querySelector('.header-mobile-panel');
+      backdrop?.classList.remove('active');
+      panel?.classList.remove('active');
+      document.body.style.overflow = '';
     });
-  }
-  
-  // Initialize on page load and after View Transitions
-  document.addEventListener('astro:page-load', initMobileMenu);
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    initMobileMenu();
-  }
+    
+    // Initialize on page load and after View Transitions
+    document.addEventListener('astro:page-load', initMobileMenu);
+  })();
 </script>

@@ -319,120 +319,140 @@ const allReviews: Review[] = await getCollection("reviews");
 </style>
 
 <script>
-  function initTestimonials() {
-    const container = document.querySelector('[data-testimonials]');
-    if (!container) return;
-    
-    const slider = container.querySelector('.testimonials-slider') as HTMLElement;
-    const cards = container.querySelectorAll('.testimonial-card');
-    const dots = document.querySelectorAll('.testimonial-dot');
-    const prevBtn = document.querySelector('[data-prev]');
-    const nextBtn = document.querySelector('[data-next]');
-    
-    if (!slider || cards.length === 0) return;
-    
-    let currentIndex = 0;
+  // Testimonials slider with proper cleanup for View Transitions
+  (function() {
+    let controller: AbortController | null = null;
     let autoplayInterval: ReturnType<typeof setInterval> | null = null;
-    const totalSlides = cards.length;
     
-    function goToSlide(index: number) {
-      // Wrap around
-      if (index < 0) index = totalSlides - 1;
-      if (index >= totalSlides) index = 0;
-      
-      currentIndex = index;
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-      
-      // Update dots
-      dots.forEach((dot, i) => {
-        dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
-      });
-    }
-    
-    function nextSlide() {
-      goToSlide(currentIndex + 1);
-    }
-    
-    function prevSlide() {
-      goToSlide(currentIndex - 1);
-    }
-    
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayInterval = setInterval(nextSlide, 5000);
-    }
-    
-    function stopAutoplay() {
+    function cleanup() {
+      if (controller) {
+        controller.abort();
+        controller = null;
+      }
       if (autoplayInterval) {
         clearInterval(autoplayInterval);
         autoplayInterval = null;
       }
     }
     
-    // Event listeners
-    prevBtn?.addEventListener('click', () => {
-      prevSlide();
-      startAutoplay();
-    });
-    
-    nextBtn?.addEventListener('click', () => {
-      nextSlide();
-      startAutoplay();
-    });
-    
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-        startAutoplay();
-      });
-    });
-    
-    // Pause on hover
-    container.addEventListener('mouseenter', stopAutoplay);
-    container.addEventListener('mouseleave', startAutoplay);
-    
-    // Touch/swipe support
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    container.addEventListener('touchstart', (e) => {
-      touchStartX = (e as TouchEvent).changedTouches[0].screenX;
-    }, { passive: true });
-    
-    container.addEventListener('touchend', (e) => {
-      touchEndX = (e as TouchEvent).changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
+    function initTestimonials() {
+      cleanup();
       
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-        startAutoplay();
+      const container = document.querySelector('[data-testimonials]');
+      if (!container) return;
+      
+      controller = new AbortController();
+      const signal = controller.signal;
+      
+      const slider = container.querySelector('.testimonials-slider') as HTMLElement;
+      const cards = container.querySelectorAll('.testimonial-card');
+      const dots = document.querySelectorAll('.testimonial-dot');
+      const prevBtn = document.querySelector('[data-prev]');
+      const nextBtn = document.querySelector('[data-next]');
+      
+      if (!slider || cards.length === 0) return;
+      
+      let currentIndex = 0;
+      const totalSlides = cards.length;
+      
+      // Reset slider position on init
+      slider.style.transform = 'translateX(0)';
+      
+      function goToSlide(index: number) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        
+        currentIndex = index;
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        dots.forEach((dot, i) => {
+          dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+        });
       }
-    }, { passive: true });
-    
-    // Keyboard navigation
-    container.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
+      
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+      
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+      
+      function startAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+        }
+        autoplayInterval = setInterval(nextSlide, 5000);
+      }
+      
+      function stopAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          autoplayInterval = null;
+        }
+      }
+      
+      // Event listeners with abort signal
+      prevBtn?.addEventListener('click', () => {
         prevSlide();
         startAutoplay();
-      } else if (e.key === 'ArrowRight') {
+      }, { signal });
+      
+      nextBtn?.addEventListener('click', () => {
         nextSlide();
         startAutoplay();
-      }
-    });
+      }, { signal });
+      
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          goToSlide(index);
+          startAutoplay();
+        }, { signal });
+      });
+      
+      container.addEventListener('mouseenter', stopAutoplay, { signal });
+      container.addEventListener('mouseleave', startAutoplay, { signal });
+      
+      // Touch/swipe support
+      let touchStartX = 0;
+      
+      container.addEventListener('touchstart', (e) => {
+        touchStartX = (e as TouchEvent).changedTouches[0].screenX;
+      }, { passive: true, signal });
+      
+      container.addEventListener('touchend', (e) => {
+        const touchEndX = (e as TouchEvent).changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+          startAutoplay();
+        }
+      }, { passive: true, signal });
+      
+      // Keyboard navigation (scoped to when container is focused)
+      (container as HTMLElement).addEventListener('keydown', function(e) {
+        if ((e as KeyboardEvent).key === 'ArrowLeft') {
+          prevSlide();
+          startAutoplay();
+        } else if ((e as KeyboardEvent).key === 'ArrowRight') {
+          nextSlide();
+          startAutoplay();
+        }
+      }, { signal });
+      
+      // Start autoplay
+      startAutoplay();
+    }
     
-    // Start autoplay
-    startAutoplay();
-  }
-  
-  // Initialize
-  document.addEventListener('astro:page-load', initTestimonials);
-  document.addEventListener('DOMContentLoaded', initTestimonials);
-  
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(initTestimonials, 0);
-  }
+    // Cleanup before page swap
+    document.addEventListener('astro:before-swap', cleanup);
+    
+    // Initialize on page load
+    document.addEventListener('astro:page-load', initTestimonials);
+  })();
 </script>

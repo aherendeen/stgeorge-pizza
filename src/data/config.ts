@@ -1,23 +1,22 @@
 // Global variables
 export const siteLang = "en-US";
 export const siteCurrency = "USD";
-export const siteDomain = "st-george-pizza.vercel.app";
+export const siteDomain = "localhost:4321";
 export const siteName = "St. George Pizza";
 export const siteSlogan = "The best pies in St. George!";
-export const themeColor = "#FF0000";
 
 export const phone = {
-	href: "tel:+123456789",
-	label: "(123) 456-789",
+	href: "#",
+	label: "(435) 555-0123",
 };
 
 export const email = {
-	href: "mailto:info@st-george-pizza.vercel.app",
-	label: "info@st-george-pizza.vercel.app",
+	href: "#",
+	label: "hello@stgeorgepizza.local",
 };
 
 export const address = {
-	street: "1234 Space Street",
+	street: "1234 Red Rock Blvd",
 	city: "St. George",
 	zip: "84790",
 	state: "UT",
@@ -26,33 +25,28 @@ export const address = {
 
 export const socialMedia = {
 	facebook: {
-		url: "https://facebook.com/herendeenandrew",
+		url: "#",
 		label: "Facebook",
-		icon: "facebook",
+		icon: "lucide:facebook",
 	},
 	X: {
-		url: "https://x.com/_aherendeen",
+		url: "#",
 		label: "X",
-		icon: "twitter",
+		icon: "lucide:twitter",
 	},
 	instagram: {
-		url: "https://instagram.com/andrewherendeen",
+		url: "#",
 		label: "Instagram",
-		icon: "instagram",
-	},
-	linkedin: {
-		url: "https://linkedin.com/in/herendeenandrew",
-		label: "LinkedIn",
-		icon: "linkedin",
+		icon: "lucide:instagram",
 	},
 };
 
 export const hours = {
-	monday: "9:00 - 17:00",
-	tuesday: "9:00 - 17:00",
-	wednesday: "9:00 - 17:00",
-	thursday: "9:00 - 17:00",
-	friday: "9:00 - 17:00",
-	saturday: "9:00 - 17:00",
-	sunday: "Closed",
+	monday: "11:00 - 21:00",
+	tuesday: "11:00 - 21:00",
+	wednesday: "11:00 - 21:00",
+	thursday: "11:00 - 21:00",
+	friday: "11:00 - 22:00",
+	saturday: "11:00 - 22:00",
+	sunday: "12:00 - 20:00",
 };

@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Section.astro";
 import Hero from "../components/Hero.astro";
@@ -13,22 +14,24 @@ import PizzaHero from "../assets/images/pizza-hero.png";
 ---
 
 <Layout>
-  <Section class:list={"bg-white"}>
+  <Section>
     <Hero>
       <div slot="hero-content-left" class="prose max-w-none max-lg:order-1">
         <Badge title="il ristorante italiana" />
-        <h1 class="font-black">
+        <h1 class="font-black text-primary">
           Real Italian food in a real Italian restaurant...
         </h1>
 
-        <p>
+        <p class="text-secondary">
           Experience the taste of Italy with our authentic dishes made from the
           finest ingredients. Indulge in our wide variety of pizzas, pastas, and
           desserts, all crafted with love and tradition. Whether you're dining
           in or taking out, we promise a memorable culinary experience.
         </p>
 
-        <span class="text-brand-green font-medium">✔ We also deliver</span>
+        <span class="text-accent font-medium flex items-center gap-2">
+          <Icon name="lucide:check" class="size-4" /> We also deliver
+        </span>
 
         <div class="mt-8 flex items-center gap-x-8">
           <Button url="/book">Book now</Button>
@@ -49,35 +52,35 @@ import PizzaHero from "../assets/images/pizza-hero.png";
     </Hero>
   </Section>
 
-  <Section class:list={"bg-white"}>
+  <Section>
     <Article>
-      <h2>Welcome to St. George Pizza!</h2>
-      <p>
+      <h2 class="text-primary">Welcome to St. George Pizza!</h2>
+      <p class="text-secondary">
         Nestled in the heart of the city, <strong>St. George Pizza</strong> offers
         an authentic Italian dining experience like no other. From the moment you
         step through our doors, you'll be transported to the vibrant streets of Italy,
         where good food and great company are at the center of life.
       </p>
 
-      <h3>Our Story</h3>
-      <p>
+      <h3 class="text-primary">Our Story</h3>
+      <p class="text-secondary">
         Founded in <em>1998</em>, our family-owned restaurant has always been a
         labor of love. Inspired by the recipes passed down through generations,
         we bring the <u>rich culinary heritage</u> of Italy to your plate. Every
         dish tells a story, and every meal is a celebration of flavor.
       </p>
 
-      <h3>Our Philosophy</h3>
-      <blockquote>"The secret ingredient is always love."</blockquote>
-      <p>
+      <h3 class="text-primary">Our Philosophy</h3>
+      <blockquote class="border-l-accent text-secondary">"The secret ingredient is always love."</blockquote>
+      <p class="text-secondary">
         At <strong>St. George Pizza</strong>, we believe in the simple joy of
         fresh ingredients, time-honored techniques, and a passion for creating
         memorable meals. From our hand-rolled pasta to our wood-fired pizzas,
         every bite is crafted with care.
       </p>
 
-      <h4>What Makes Us Special?</h4>
-      <ul>
+      <h4 class="text-primary">What Makes Us Special?</h4>
+      <ul class="text-secondary">
         <li>
           <strong>Authenticity:</strong> Traditional recipes, just like Nonna used
           to make.
@@ -91,8 +94,8 @@ import PizzaHero from "../assets/images/pizza-hero.png";
         </li>
       </ul>
 
-      <h3>Join Us</h3>
-      <p>
+      <h3 class="text-primary">Join Us</h3>
+      <p class="text-secondary">
         Whether you're celebrating a special occasion or simply indulging in the
         pleasures of Italian cuisine, <strong>St. George Pizza</strong> is the perfect
         destination.

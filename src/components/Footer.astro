@@ -1,13 +1,14 @@
 ---
+import { Icon } from "astro-icon/components";
 import { menuMain } from "../data/menus";
+import { siteName, socialMedia } from "../data/config";
 const currentYear = new Date().getFullYear();
-import { siteName } from "../data/config";
 ---
 
-<footer class="bg-brand-green text-white">
+<footer class="bg-tertiary border-t border-border">
   <div class="container pt-16 pb-8">
-    <p class="text-center font-bold text-4xl text-white">
-      St. George<span class="text-brand-red bg-white px-3 ml-1 rounded-lg"
+    <p class="text-center font-bold text-4xl text-primary">
+      St. George<span class="text-accent bg-accent/10 px-3 ml-1 rounded-lg"
         >Pizza</span
       >
     </p>
@@ -17,16 +18,29 @@ import { siteName } from "../data/config";
     >
       {
         menuMain.map((item) => (
-          <a href={item.url} class="hover:underline">
+          <a href={item.url} class="text-secondary hover:text-primary transition">
             {item.name}
           </a>
         ))
       }
     </nav>
-    <p class="mt-10 text-center text-sm">
+    <div class="flex items-center justify-center gap-6 mt-8">
+      {
+        Object.values(socialMedia).map((social) => (
+          <a
+            href={social.url}
+            class="text-muted hover:text-primary transition"
+            aria-label={social.label}
+          >
+            <Icon name={social.icon} class="size-5" />
+          </a>
+        ))
+      }
+    </div>
+    <p class="mt-8 text-center text-sm text-muted">
       &copy; {currentYear}
       {siteName}. All rights reserved. <a
-        class="underline"
+        class="underline hover:text-primary transition"
         href="/privacy-policy">Privacy</a
       >
     </p>

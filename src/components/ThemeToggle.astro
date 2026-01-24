@@ -1,0 +1,65 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div
+	x-data="themeToggle()"
+	x-init="init()"
+	class="relative"
+>
+	<button
+		@click="toggle()"
+		type="button"
+		class="p-2 rounded-full transition-colors duration-200 hover:bg-[var(--color-bg-tertiary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
+		:aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+	>
+		<span x-show="!isDark" x-cloak>
+			<Icon name="lucide:moon" class="size-5 text-[var(--color-text-primary)]" />
+		</span>
+		<span x-show="isDark" x-cloak>
+			<Icon name="lucide:sun" class="size-5 text-[var(--color-text-primary)]" />
+		</span>
+	</button>
+</div>
+
+<script>
+	document.addEventListener("alpine:init", () => {
+		// @ts-ignore
+		window.Alpine.data("themeToggle", () => ({
+			isDark: false,
+
+			init() {
+				// Check localStorage first, then system preference
+				const stored = localStorage.getItem("theme");
+				if (stored) {
+					this.isDark = stored === "dark";
+				} else {
+					this.isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+				}
+				this.applyTheme();
+
+				// Listen for system theme changes
+				window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+					if (!localStorage.getItem("theme")) {
+						this.isDark = e.matches;
+						this.applyTheme();
+					}
+				});
+			},
+
+			toggle() {
+				this.isDark = !this.isDark;
+				localStorage.setItem("theme", this.isDark ? "dark" : "light");
+				this.applyTheme();
+			},
+
+			applyTheme() {
+				if (this.isDark) {
+					document.documentElement.classList.add("dark");
+				} else {
+					document.documentElement.classList.remove("dark");
+				}
+			},
+		}));
+	});
+</script>

@@ -1,5 +1,3 @@
-# robots.txt for st-george-pizza.vercel.app
+# robots.txt (auto-generated for non-production environment: development)
 User-agent: *
-Allow: /
-
-Sitemap: https://st-george-pizza.vercel.app/sitemap.xml
+Disallow: /

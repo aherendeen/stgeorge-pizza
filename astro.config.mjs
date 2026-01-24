@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import alpinejs from "@astrojs/alpinejs";
 import playformInline from "@playform/inline";
 import mdx from "@astrojs/mdx";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,6 +17,11 @@ export default defineConfig({
 			Beasties: true,
 		}),
 		mdx(),
+		icon({
+			include: {
+				lucide: ["*"],
+			},
+		}),
 	],
 	output: "static",
 	vite: {

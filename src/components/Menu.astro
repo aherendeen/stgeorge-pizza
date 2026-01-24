@@ -9,15 +9,15 @@ const siteLangFormat = siteLang.replace("_", "-");
 
 <!-- Quick Nav -->
 <div id="plate-nav-wrapper" class="mb-20 sticky top-8 z-10">
-  <nav class="bg-brand-green text-white sm:rounded-full max-w-5xl mx-auto">
+  <nav class="bg-tertiary border border-border sm:rounded-full max-w-5xl mx-auto">
     <div class="swiper-plates w-auto overflow-hidden">
       <ul id="plate-nav" class="px-2.5 py-3 swiper-wrapper">
         {
           plates.map((plate: Plate) => (
-            <li class="swiper-slide !w-auto last:mr-5">
+            <li class="swiper-slide w-auto! last:mr-5">
               <a
                 href={`#${plate.data.slug}`}
-                class="rounded-full px-2 py-1 transition font-medium select-none"
+                class="rounded-full px-2 py-1 transition font-medium select-none text-secondary"
                 data-category-link={plate.data.slug}
               >
                 {plate.data.prettyName}
@@ -39,8 +39,8 @@ const siteLangFormat = siteLang.replace("_", "-");
         data-category-section={plate.data.slug}
       >
         <div class="flex flex-col items-center gap-2 max-w-lg mx-auto text-balance text-center">
-          <h3 class="h4 text-brand-green/70">{plate.data.prettyName}</h3>
-          <p>{plate.data.description}</p>
+          <h3 class="h4 text-muted">{plate.data.prettyName}</h3>
+          <p class="text-secondary">{plate.data.description}</p>
         </div>
 
         <dl class="max-w-5xl mx-auto">
@@ -49,10 +49,10 @@ const siteLangFormat = siteLang.replace("_", "-");
               <div>
                 <dt>
                   <div class="flex justify-between items-center">
-                    <span class="font-bold text-2xl tracking-wide">
+                    <span class="font-bold text-2xl tracking-wide text-primary">
                       {item.name}
                     </span>
-                    <span class="font-medium text-lg">
+                    <span class="font-medium text-lg text-accent">
                       {new Intl.NumberFormat(siteLangFormat, {
                         style: "currency",
                         currency: siteCurrency,
@@ -61,7 +61,7 @@ const siteLangFormat = siteLang.replace("_", "-");
                   </div>
                 </dt>
                 <dd>
-                  <p class="mt-2 text-gray-500 tracking-wide leading-normal text-balance">
+                  <p class="mt-2 text-muted tracking-wide leading-normal text-balance">
                     {item.description}
                   </p>
                 </dd>
@@ -113,15 +113,15 @@ const siteLangFormat = siteLang.replace("_", "-");
 
     // Add hover effect to all links initially
     categoryLinks.forEach((link) => {
-      link.classList.add("hover:bg-white/10");
+      link.classList.add("hover:bg-surface-200", "dark:hover:bg-surface-700");
     });
 
     // Function to set active category
     function setActiveCategory(id: string) {
       // Remove active classes and restore hover effect to all links
       categoryLinks.forEach((link) => {
-        link.classList.remove("bg-white", "text-brand-green");
-        link.classList.add("hover:bg-white/10");
+        link.classList.remove("bg-accent", "text-white");
+        link.classList.add("hover:bg-surface-200", "dark:hover:bg-surface-700", "text-secondary");
       });
 
       // Add active classes to current link and remove hover effect
@@ -129,8 +129,8 @@ const siteLangFormat = siteLang.replace("_", "-");
         `[data-category-link="${id}"]`
       );
       if (currentLink) {
-        currentLink.classList.add("bg-white", "text-brand-green");
-        currentLink.classList.remove("hover:bg-white/10");
+        currentLink.classList.add("bg-accent", "text-white");
+        currentLink.classList.remove("hover:bg-surface-200", "dark:hover:bg-surface-700", "text-secondary");
         activeLink = currentLink;
 
         // Slide to make the active link visible if needed

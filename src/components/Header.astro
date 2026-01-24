@@ -391,3 +391,31 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
     background-color: var(--color-accent-hover);
   }
 </style>
+
+<script>
+  // Reinitialize header Alpine state after View Transitions
+  document.addEventListener("astro:page-load", () => {
+    // @ts-ignore
+    if (window.Alpine) {
+      // Reset mobile menu state on page navigation
+      const header = document.querySelector("header[x-data]");
+      // @ts-ignore
+      if (header && header._x_dataStack) {
+        // @ts-ignore
+        header._x_dataStack[0].open = false;
+      }
+    }
+  });
+  
+  // Close menu on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const header = document.querySelector("header[x-data]");
+      // @ts-ignore
+      if (header && header._x_dataStack) {
+        // @ts-ignore
+        header._x_dataStack[0].open = false;
+      }
+    }
+  });
+</script>

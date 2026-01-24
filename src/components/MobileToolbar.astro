@@ -1,0 +1,128 @@
+---
+import { Icon } from "astro-icon/components";
+import { phone } from "../data/config";
+
+const rmTrailingSlash = (path: string): string => {
+  return path.endsWith("/") && path.length > 1
+    ? path.slice(0, path.length - 1)
+    : path;
+};
+
+const pathname = rmTrailingSlash(Astro.url.pathname);
+
+const toolbarItems = [
+  { href: "/", icon: "lucide:home", label: "Home" },
+  { href: "/menu", icon: "lucide:utensils", label: "Menu" },
+  { href: phone.href, icon: "lucide:phone", label: "Call", isPhone: true },
+  { href: "/book", icon: "lucide:calendar", label: "Book", isCta: true },
+];
+---
+
+<nav class="mobile-toolbar" aria-label="Mobile navigation">
+  <div class="mobile-toolbar-inner">
+    {toolbarItems.map((item) => (
+      <a
+        href={item.href}
+        class:list={[
+          "mobile-toolbar-item",
+          item.isPhone && "mobile-toolbar-phone",
+          item.isCta && "mobile-toolbar-cta",
+          !item.isPhone && !item.isCta && pathname === item.href && "mobile-toolbar-active"
+        ]}
+        aria-label={item.label}
+      >
+        <Icon name={item.icon} class="size-5" aria-hidden="true" />
+        <span class="mobile-toolbar-label">{item.label}</span>
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .mobile-toolbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background-color: var(--color-bg-primary);
+    border-top: 1px solid var(--color-border);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05);
+  }
+  
+  @media (min-width: 1024px) {
+    .mobile-toolbar {
+      display: none;
+    }
+  }
+  
+  .mobile-toolbar-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 32rem;
+    margin: 0 auto;
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .mobile-toolbar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    flex: 1;
+    padding: 0.5rem 0.25rem;
+    border-radius: 0.5rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    min-width: 4rem;
+  }
+  
+  .mobile-toolbar-item:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-tertiary);
+  }
+  
+  .mobile-toolbar-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+  
+  .mobile-toolbar-active {
+    color: var(--color-accent);
+  }
+  
+  .mobile-toolbar-active .mobile-toolbar-label {
+    font-weight: 700;
+  }
+  
+  .mobile-toolbar-phone {
+    color: var(--color-accent);
+  }
+  
+  .mobile-toolbar-phone:hover {
+    color: var(--color-accent-hover);
+    background-color: var(--color-accent-bg);
+  }
+  
+  .mobile-toolbar-cta {
+    color: var(--color-cta);
+  }
+  
+  .mobile-toolbar-cta:hover {
+    color: var(--color-cta-hover);
+    background-color: var(--color-cta-bg);
+  }
+  
+  /* Add bottom padding to body for mobile toolbar */
+  @media (max-width: 1023px) {
+    :global(body) {
+      padding-bottom: 4.5rem;
+    }
+  }
+</style>

@@ -503,3 +503,10 @@ input::placeholder, textarea::placeholder { color: var(--color-text-muted); }
 }
 
 [data-icon] { display: inline-block; vertical-align: middle; }
+
+/* Mobile toolbar body padding */
+@media (max-width: 1023px) {
+	body {
+		padding-bottom: 4.5rem;
+	}
+}

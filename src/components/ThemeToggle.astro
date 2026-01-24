@@ -49,37 +49,57 @@ import { Icon } from "astro-icon/components";
 </style>
 
 <script>
-	document.addEventListener("alpine:init", () => {
+	// Register Alpine component once
+	function registerThemeToggle() {
 		// @ts-ignore
-		window.Alpine.data("themeToggle", () => ({
-			isDark: false,
+		if (window.Alpine && !window.Alpine.data._x_registeredThemeToggle) {
+			// @ts-ignore
+			window.Alpine.data("themeToggle", () => ({
+				isDark: false,
 
-			init() {
-				const stored = localStorage.getItem("theme");
-				if (stored) {
-					this.isDark = stored === "dark";
-				} else {
-					this.isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-				}
-				this.applyTheme();
-
-				window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-					if (!localStorage.getItem("theme")) {
-						this.isDark = e.matches;
-						this.applyTheme();
+				init() {
+					const stored = localStorage.getItem("theme");
+					if (stored) {
+						this.isDark = stored === "dark";
+					} else {
+						this.isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 					}
-				});
-			},
+					this.applyTheme();
 
-			toggle() {
-				this.isDark = !this.isDark;
-				localStorage.setItem("theme", this.isDark ? "dark" : "light");
-				this.applyTheme();
-			},
+					window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+						if (!localStorage.getItem("theme")) {
+							this.isDark = e.matches;
+							this.applyTheme();
+						}
+					});
+				},
 
-			applyTheme() {
-				document.documentElement.classList.toggle("dark", this.isDark);
-			},
-		}));
+				toggle() {
+					this.isDark = !this.isDark;
+					localStorage.setItem("theme", this.isDark ? "dark" : "light");
+					this.applyTheme();
+				},
+
+				applyTheme() {
+					document.documentElement.classList.toggle("dark", this.isDark);
+				},
+			}));
+			// @ts-ignore
+			window.Alpine.data._x_registeredThemeToggle = true;
+		}
+	}
+
+	// Register on Alpine init
+	document.addEventListener("alpine:init", registerThemeToggle);
+	
+	// Re-initialize Alpine components after View Transitions
+	document.addEventListener("astro:page-load", () => {
+		// @ts-ignore
+		if (window.Alpine) {
+			registerThemeToggle();
+			// Reinitialize all Alpine components on the page
+			// @ts-ignore
+			window.Alpine.initTree(document.body);
+		}
 	});
 </script>

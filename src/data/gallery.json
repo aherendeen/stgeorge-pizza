@@ -3,54 +3,54 @@
 		"id": 1,
 		"title": "pexels-adrienn",
 		"image": "/src/assets/images/gallery/pexels-adrienn-638530-1537635.jpg",
-		"alt": "pexels-adrienn-638530-1537635"
+		"alt": "Rustic Italian dining table setting"
 	},
 	{
 		"id": 2,
 		"title": "pexels-annija-mieze",
 		"image": "/src/assets/images/gallery/pexels-annija-mieze-427042079-15197931.jpg",
-		"alt": "pexels-annija-mieze-427042079-15197931"
+		"alt": "Fresh pasta with tomato basil sauce"
 	},
 	{
 		"id": 3,
 		"title": "pexels-enginakyurt",
 		"image": "/src/assets/images/gallery/pexels-enginakyurt-1487511.jpg",
-		"alt": "pexels-enginakyurt-1487511"
+		"alt": "Wood-fired pizza with melted mozzarella"
 	},
 	{
 		"id": 4,
 		"title": "pexels-fariphotography",
 		"image": "/src/assets/images/gallery/pexels-fariphotography-905847.jpg",
-		"alt": "pexels-fariphotography-905847"
+		"alt": "Classic pepperoni pizza slice"
 	},
 	{
 		"id": 5,
 		"title": "pexels-narda-yescas",
 		"image": "/src/assets/images/gallery/pexels-narda-yescas-724842-1566837.jpg",
-		"alt": "pexels-narda-yescas-724842-1566837"
+		"alt": "Italian antipasto platter with olives"
 	},
 	{
 		"id": 6,
 		"title": "pexels-pixabay",
 		"image": "/src/assets/images/gallery/pexels-pixabay-262978.jpg",
-		"alt": "pexels-pixabay-262978"
+		"alt": "Cozy restaurant interior with warm lighting"
 	},
 	{
 		"id": 7,
 		"title": "pexels-rachel-claire",
 		"image": "/src/assets/images/gallery/pexels-rachel-claire-5531424.jpg",
-		"alt": "pexels-rachel-claire-5531424"
+		"alt": "Freshly baked focaccia bread with herbs"
 	},
 	{
 		"id": 8,
 		"title": "pexels-vlah",
 		"image": "/src/assets/images/gallery/pexels-vlah-3084550.jpg",
-		"alt": "pexels-vlah-3084550"
+		"alt": "Caprese salad with fresh buffalo mozzarella"
 	},
 	{
 		"id": 9,
 		"title": "pexels-wildlittlethingsphoto",
 		"image": "/src/assets/images/gallery/pexels-wildlittlethingsphoto-696218.jpg",
-		"alt": "pexels-wildlittlethingsphoto-696218"
+		"alt": "Tiramisu dessert with espresso dusting"
 	}
 ]

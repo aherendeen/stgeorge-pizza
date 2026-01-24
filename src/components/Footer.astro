@@ -5,25 +5,27 @@ import { siteName, siteDomain, socialMedia, address, phone, email, hours } from 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-secondary border-t border-border">
-  <div class="container py-16">
+<footer class="footer">
+  <div class="container py-16 lg:py-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-      <!-- Brand -->
+      <!-- Brand Column -->
       <div class="lg:col-span-1">
-        <a href="/" class="inline-block">
-          <span class="font-bold text-2xl text-primary">
-            St. George<span class="text-accent bg-accent-subtle px-2 py-0.5 ml-1 rounded-lg">Pizza</span>
+        <a href="/" class="footer-brand">
+          <span class="footer-brand-text">
+            St. George <span class="footer-brand-accent">Pizza</span>
           </span>
         </a>
-        <p class="mt-4 text-secondary text-sm leading-relaxed">
+        <p class="footer-tagline">
           Authentic Italian cuisine in the heart of St. George, Utah. Family-owned since 1998.
         </p>
-        <div class="flex items-center gap-4 mt-6">
+        <div class="footer-social">
           {Object.values(socialMedia).map((social) => (
             <a
               href={social.url}
-              class="text-muted hover:text-accent transition-colors p-2 rounded-lg hover:bg-tertiary"
+              class="footer-social-link"
               aria-label={social.label}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <Icon name={social.icon} class="size-5" />
             </a>
@@ -31,60 +33,275 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
       
-      <!-- Navigation -->
+      <!-- Quick Links -->
       <div>
-        <h3 class="font-semibold text-primary text-sm uppercase tracking-wider mb-4">Navigation</h3>
-        <nav class="space-y-3" aria-label="Footer">
+        <h3 class="footer-heading">Quick Links</h3>
+        <nav class="footer-nav" aria-label="Footer navigation">
           {menuMain.map((item) => (
-            <a href={item.url} class="block text-secondary hover:text-accent transition-colors text-sm">
+            <a href={item.url} class="footer-nav-link">
               {item.name}
             </a>
           ))}
         </nav>
       </div>
       
-      <!-- Contact -->
+      <!-- Contact Info -->
       <div>
-        <h3 class="font-semibold text-primary text-sm uppercase tracking-wider mb-4">Contact</h3>
-        <div class="space-y-3 text-sm">
-          <p class="text-secondary">
-            {address.street}<br />
-            {address.city}, {address.state} {address.zip}
-          </p>
-          <p class="text-secondary">{phone.label}</p>
-          <p class="text-secondary">{email.label}</p>
-        </div>
+        <h3 class="footer-heading">Contact Us</h3>
+        <address class="footer-contact">
+          <a href={address.mapsUrl} class="footer-contact-item" target="_blank" rel="noopener noreferrer">
+            <Icon name="lucide:map-pin" class="footer-contact-icon" />
+            <span>
+              {address.street}<br />
+              {address.city}, {address.state} {address.zip}
+            </span>
+          </a>
+          <a href={phone.href} class="footer-contact-item">
+            <Icon name="lucide:phone" class="footer-contact-icon" />
+            <span>{phone.label}</span>
+          </a>
+          <a href={email.href} class="footer-contact-item">
+            <Icon name="lucide:mail" class="footer-contact-icon" />
+            <span>{email.label}</span>
+          </a>
+        </address>
       </div>
       
       <!-- Hours -->
       <div>
-        <h3 class="font-semibold text-primary text-sm uppercase tracking-wider mb-4">Hours</h3>
-        <div class="space-y-2 text-sm">
-          <div class="flex justify-between text-secondary">
-            <span>Mon - Thu</span>
-            <span>{hours.monday}</span>
+        <h3 class="footer-heading">Opening Hours</h3>
+        <dl class="footer-hours">
+          <div class="footer-hours-row">
+            <dt>Mon - Thu</dt>
+            <dd>{hours.monday}</dd>
           </div>
-          <div class="flex justify-between text-secondary">
-            <span>Fri - Sat</span>
-            <span>{hours.friday}</span>
+          <div class="footer-hours-row">
+            <dt>Fri - Sat</dt>
+            <dd>{hours.friday}</dd>
           </div>
-          <div class="flex justify-between text-secondary">
-            <span>Sunday</span>
-            <span>{hours.sunday}</span>
+          <div class="footer-hours-row">
+            <dt>Sunday</dt>
+            <dd>{hours.sunday}</dd>
           </div>
-        </div>
+        </dl>
+        <a href="/book" class="footer-cta">
+          <Icon name="lucide:calendar" class="size-4" />
+          Reserve a Table
+        </a>
       </div>
     </div>
     
-    <div class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-muted">
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">
         &copy; {currentYear} {siteName}. All rights reserved.
       </p>
-      <div class="flex items-center gap-6 text-sm">
-        <a class="text-muted hover:text-accent transition-colors" href="/privacy-policy">Privacy Policy</a>
-        <span class="text-border">|</span>
-        <span class="text-muted">{siteDomain}</span>
+      <div class="footer-legal">
+        <a href="/privacy-policy" class="footer-legal-link">Privacy Policy</a>
+        <span class="footer-legal-divider" aria-hidden="true"></span>
+        <span class="footer-legal-domain">{siteDomain}</span>
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer {
+    background-color: var(--color-stone-900);
+    color: var(--color-stone-200);
+    border-top: 1px solid var(--color-stone-800);
+  }
+  
+  .footer-brand {
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .footer-brand-text {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #ffffff;
+  }
+  
+  .footer-brand-accent {
+    color: var(--color-cta);
+  }
+  
+  .footer-tagline {
+    margin-top: 1rem;
+    color: var(--color-stone-400);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  
+  .footer-social {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    color: var(--color-stone-400);
+    background-color: var(--color-stone-800);
+    transition: all 0.2s ease;
+  }
+  
+  .footer-social-link:hover {
+    color: #ffffff;
+    background-color: var(--color-accent);
+  }
+  
+  .footer-heading {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-cta);
+    display: inline-block;
+  }
+  
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .footer-nav-link {
+    color: var(--color-stone-400);
+    font-size: 0.9375rem;
+    transition: color 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .footer-nav-link:hover {
+    color: var(--color-accent-light);
+  }
+  
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-style: normal;
+  }
+  
+  .footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--color-stone-400);
+    font-size: 0.9375rem;
+    transition: color 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .footer-contact-item:hover {
+    color: var(--color-accent-light);
+  }
+  
+  .footer-contact-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+    color: var(--color-cta-light);
+  }
+  
+  .footer-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .footer-hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9375rem;
+  }
+  
+  .footer-hours-row dt {
+    color: var(--color-stone-400);
+  }
+  
+  .footer-hours-row dd {
+    color: var(--color-stone-300);
+    font-weight: 500;
+  }
+  
+  .footer-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0.625rem 1rem;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .footer-cta:hover {
+    background-color: var(--color-cta-hover);
+  }
+  
+  .footer-bottom {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-stone-800);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .footer-bottom {
+      flex-direction: row;
+    }
+  }
+  
+  .footer-copyright {
+    font-size: 0.875rem;
+    color: var(--color-stone-500);
+  }
+  
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .footer-legal-link {
+    color: var(--color-stone-400);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .footer-legal-link:hover {
+    color: var(--color-accent-light);
+  }
+  
+  .footer-legal-divider {
+    width: 1px;
+    height: 1rem;
+    background-color: var(--color-stone-700);
+  }
+  
+  .footer-legal-domain {
+    color: var(--color-stone-500);
+  }
+</style>

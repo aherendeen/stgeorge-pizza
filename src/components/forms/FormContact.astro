@@ -2,24 +2,24 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<form action="#" class="space-y-6 mx-auto max-w-md">
+<form class="space-y-5 mx-auto max-w-md" data-form="contact">
   <div>
-    <label for="name" class="block text-sm font-medium text-primary mb-2">Name</label>
+    <label for="contact-name" class="form-label">Name</label>
     <input 
       type="text" 
       name="name" 
-      id="name" 
+      id="contact-name" 
       autocomplete="name"
       required 
     />
   </div>
 
   <div>
-    <label for="email" class="block text-sm font-medium text-primary mb-2">Email</label>
+    <label for="contact-email" class="form-label">Email</label>
     <input
       type="email"
       name="email"
-      id="email"
+      id="contact-email"
       placeholder="you@example.com"
       autocomplete="email"
       required
@@ -27,10 +27,10 @@ import { Icon } from "astro-icon/components";
   </div>
 
   <div>
-    <label for="message" class="block text-sm font-medium text-primary mb-2">Message</label>
+    <label for="contact-message" class="form-label">Message</label>
     <textarea 
       name="message" 
-      id="message" 
+      id="contact-message" 
       rows="4" 
       placeholder="How can we help?"
       required
@@ -38,11 +38,8 @@ import { Icon } from "astro-icon/components";
   </div>
 
   <div class="pt-2">
-    <button type="submit" class="button button-primary w-full group">
-      <Icon 
-        name="lucide:send" 
-        class="size-4 -rotate-45 inline-block mr-2 group-hover:rotate-0 transition-transform duration-300" 
-      />
+    <button type="submit" class="button button-primary w-full">
+      <Icon name="lucide:send" class="size-4" aria-hidden="true" />
       Send Message
     </button>
   </div>

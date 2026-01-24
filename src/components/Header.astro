@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { menuMain } from "../data/menus.js";
 import ThemeToggle from "./ThemeToggle.astro";
+import { phone } from "../data/config";
 
 const rmTrailingSlash = (path: string): string => {
   return path.endsWith("/") && path.length > 1
@@ -15,21 +16,26 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
 <header 
   x-data="{ open: false }" 
   @keydown.window.escape="open = false"
-  class="header sticky top-0 z-40 w-full bg-primary border-b border-border"
+  class="header"
 >
   <div class="container py-3">
-    <nav class="flex items-center justify-between" aria-label="Global">
-      <a href="/" class="flex items-center gap-1 no-underline">
-        <span class="font-bold text-xl sm:text-2xl text-primary">
-          St. George<span class="text-accent ml-1">Pizza</span>
+    <nav class="header-nav" aria-label="Global">
+      <!-- Logo -->
+      <a href="/" class="header-logo">
+        <span class="header-logo-text">
+          St. George <span class="header-logo-accent">Pizza</span>
         </span>
       </a>
       
-      <div class="flex lg:hidden items-center gap-1">
+      <!-- Mobile Controls -->
+      <div class="header-mobile-controls">
+        <a href={phone.href} class="header-phone-mobile" aria-label="Call us">
+          <Icon name="lucide:phone" class="size-5" />
+        </a>
         <ThemeToggle />
         <button
           type="button"
-          class="inline-flex items-center justify-center rounded-lg p-2 text-secondary hover:text-primary hover:bg-tertiary transition-colors"
+          class="header-menu-btn"
           @click="open = true"
           aria-label="Open main menu"
         >
@@ -37,28 +43,29 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
         </button>
       </div>
       
-      <div class="hidden lg:flex lg:gap-x-1 lg:items-center">
+      <!-- Desktop Navigation -->
+      <div class="header-desktop-nav">
         {
           menuMain.map((item) => (
             <a
               href={item.url}
               class:list={[
-                "nav-link px-4 py-2 rounded-lg transition-colors text-sm font-semibold no-underline",
-                item.highlighted ? "nav-link-cta bg-accent text-surface-950 hover:bg-accent-hover" : "text-secondary hover:text-primary hover:bg-tertiary",
-                pathname === item.url && !item.highlighted && "text-accent font-bold"
+                "header-nav-link",
+                item.highlighted && "header-nav-cta",
+                pathname === item.url && !item.highlighted && "header-nav-active"
               ]}
             >
               {item.name}
             </a>
           ))
         }
-        <div class="ml-2 pl-2 border-l border-border">
+        <div class="header-divider">
           <ThemeToggle />
         </div>
       </div>
     </nav>
     
-    <!-- Mobile menu -->
+    <!-- Mobile Menu Overlay -->
     <div
       class="lg:hidden"
       x-ref="dialog"
@@ -67,8 +74,9 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
       aria-modal="true"
       role="dialog"
     >
+      <!-- Backdrop -->
       <div 
-        class="fixed inset-0 z-40 bg-black/40"
+        class="header-mobile-backdrop"
         x-show="open"
         x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0"
@@ -80,8 +88,9 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
         x-cloak
       ></div>
       
+      <!-- Panel -->
       <div
-        class="fixed inset-y-0 right-0 z-50 w-full max-w-xs overflow-y-auto bg-primary px-6 py-5 border-l border-border shadow-lg"
+        class="header-mobile-panel"
         x-show="open"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="translate-x-full"
@@ -91,15 +100,16 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
         x-transition:leave-end="translate-x-full"
         x-cloak
       >
-        <div class="flex items-center justify-between">
-          <a href="/" class="no-underline" @click="open = false">
-            <span class="font-bold text-xl text-primary">
-              St. George<span class="text-accent ml-1">Pizza</span>
+        <!-- Panel Header -->
+        <div class="header-mobile-header">
+          <a href="/" class="header-logo" @click="open = false">
+            <span class="header-logo-text">
+              St. George <span class="header-logo-accent">Pizza</span>
             </span>
           </a>
           <button
             type="button"
-            class="p-2 rounded-lg text-secondary hover:text-primary hover:bg-tertiary transition-colors"
+            class="header-close-btn"
             @click="open = false"
             aria-label="Close menu"
           >
@@ -107,16 +117,17 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
           </button>
         </div>
         
-        <nav class="mt-8 space-y-1">
+        <!-- Panel Nav -->
+        <nav class="header-mobile-nav">
           {
             menuMain.map((item) => (
               <a
                 @click="open = false"
                 href={item.url}
                 class:list={[
-                  "block py-3 px-4 rounded-lg font-semibold transition-colors no-underline",
-                  item.highlighted ? "bg-accent text-surface-950 text-center hover:bg-accent-hover" : "text-secondary hover:text-primary hover:bg-tertiary",
-                  pathname === item.url && !item.highlighted && "text-accent bg-accent-subtle"
+                  "header-mobile-link",
+                  item.highlighted && "header-mobile-cta",
+                  pathname === item.url && !item.highlighted && "header-mobile-active"
                 ]}
               >
                 {item.name}
@@ -124,6 +135,14 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
             ))
           }
         </nav>
+        
+        <!-- Panel Footer -->
+        <div class="header-mobile-footer">
+          <a href={phone.href} class="header-mobile-phone">
+            <Icon name="lucide:phone" class="size-5" />
+            <span>Call to Order</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -131,19 +150,244 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
 
 <style>
   .header {
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    width: 100%;
+    background-color: color-mix(in srgb, var(--color-bg-primary) 95%, transparent);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-  .nav-link-cta {
-    color: var(--color-surface-950);
+  
+  .header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  .nav-link-cta:hover {
-    color: var(--color-surface-950);
+  
+  .header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
   }
-  .text-surface-950 {
-    color: var(--color-surface-950);
+  
+  .header-logo-text {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
   }
-  .bg-accent-hover {
+  
+  @media (min-width: 640px) {
+    .header-logo-text {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .header-logo-accent {
+    color: var(--color-cta);
+  }
+  
+  .header-mobile-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    .header-mobile-controls {
+      display: none;
+    }
+  }
+  
+  .header-phone-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--color-cta);
+    transition: all 0.2s ease;
+  }
+  
+  .header-phone-mobile:hover {
+    background-color: var(--color-cta-bg);
+  }
+  
+  .header-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .header-menu-btn:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-tertiary);
+  }
+  
+  .header-desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    .header-desktop-nav {
+      display: flex;
+    }
+  }
+  
+  .header-nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .header-nav-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-tertiary);
+  }
+  
+  .header-nav-cta {
+    background-color: var(--color-cta);
+    color: #ffffff !important;
+  }
+  
+  .header-nav-cta:hover {
+    background-color: var(--color-cta-hover);
+    color: #ffffff !important;
+  }
+  
+  .header-nav-active {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+  
+  .header-divider {
+    margin-left: 0.5rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--color-border);
+  }
+  
+  .header-mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background-color: rgb(0 0 0 / 0.5);
+  }
+  
+  .header-mobile-panel {
+    position: fixed;
+    inset-block: 0;
+    right: 0;
+    z-index: 50;
+    width: 100%;
+    max-width: 20rem;
+    overflow-y: auto;
+    background-color: var(--color-bg-primary);
+    padding: 1.25rem 1.5rem;
+    border-left: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .header-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--color-text-secondary);
+    transition: all 0.2s ease;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .header-close-btn:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-tertiary);
+  }
+  
+  .header-mobile-nav {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+  
+  .header-mobile-link {
+    display: block;
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .header-mobile-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-tertiary);
+  }
+  
+  .header-mobile-cta {
+    background-color: var(--color-cta);
+    color: #ffffff !important;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  
+  .header-mobile-cta:hover {
+    background-color: var(--color-cta-hover);
+    color: #ffffff !important;
+  }
+  
+  .header-mobile-active {
+    color: var(--color-accent);
+    background-color: var(--color-accent-bg);
+  }
+  
+  .header-mobile-footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .header-mobile-phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-accent);
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  .header-mobile-phone:hover {
     background-color: var(--color-accent-hover);
   }
 </style>

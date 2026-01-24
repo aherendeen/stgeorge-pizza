@@ -1,24 +1,136 @@
 ---
 import { Icon } from "astro-icon/components";
 import { phone } from "../data/config";
+
+interface Props {
+  variant?: "default" | "compact" | "prominent";
+}
+
+const { variant = "default" } = Astro.props;
 ---
 
-<a
-  href={phone.href}
-  class="call-us-btn not-prose flex items-center gap-x-3 transition-transform duration-200 hover:-translate-y-0.5"
->
-  <div class="call-icon rounded-lg p-2.5">
+{variant === "prominent" ? (
+  <a href={phone.href} class="call-btn-prominent">
     <Icon name="lucide:phone" class="size-5" aria-hidden="true" />
-  </div>
-  <div>
-    <p class="text-xs text-muted">Call us</p>
-    <span class="text-primary font-semibold">{phone.label}</span>
-  </div>
-</a>
+    <div class="call-btn-prominent-text">
+      <span class="call-btn-prominent-label">Call to Order</span>
+      <span class="call-btn-prominent-number">{phone.label}</span>
+    </div>
+  </a>
+) : variant === "compact" ? (
+  <a href={phone.href} class="call-btn-compact" aria-label={`Call ${phone.label}`}>
+    <Icon name="lucide:phone" class="size-5" aria-hidden="true" />
+    <span>{phone.label}</span>
+  </a>
+) : (
+  <a href={phone.href} class="call-btn not-prose">
+    <div class="call-btn-icon">
+      <Icon name="lucide:phone" class="size-5" aria-hidden="true" />
+    </div>
+    <div class="call-btn-content">
+      <span class="call-btn-label">Call us</span>
+      <span class="call-btn-number">{phone.label}</span>
+    </div>
+  </a>
+)}
 
 <style>
-  .call-icon {
-    background-color: var(--color-accent);
-    color: var(--color-surface-950);
+  /* Default variant */
+  .call-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  
+  .call-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .call-btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+  
+  .call-btn-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .call-btn-label {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+  
+  .call-btn-number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  /* Compact variant */
+  .call-btn-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .call-btn-compact:hover {
+    background-color: var(--color-cta-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  
+  /* Prominent variant */
+  .call-btn-prominent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .call-btn-prominent:hover {
+    background-color: var(--color-cta-hover);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+  
+  .call-btn-prominent-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .call-btn-prominent-label {
+    font-size: 0.75rem;
+    opacity: 0.9;
+  }
+  
+  .call-btn-prominent-number {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
   }
 </style>

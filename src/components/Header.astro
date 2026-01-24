@@ -393,29 +393,42 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
 </style>
 
 <script>
-  // Reinitialize header Alpine state after View Transitions
-  document.addEventListener("astro:page-load", () => {
-    // @ts-ignore
-    if (window.Alpine) {
-      // Reset mobile menu state on page navigation
-      const header = document.querySelector("header[x-data]");
-      // @ts-ignore
-      if (header && header._x_dataStack) {
-        // @ts-ignore
-        header._x_dataStack[0].open = false;
-      }
+  // Mobile menu handler - works with View Transitions
+  function initMobileMenu() {
+    const menuBtn = document.querySelector('.header-menu-btn');
+    const closeBtn = document.querySelector('.header-close-btn');
+    const backdrop = document.querySelector('.header-mobile-backdrop');
+    const panel = document.querySelector('.header-mobile-panel');
+    const mobileLinks = document.querySelectorAll('.header-mobile-link');
+    const logoLink = document.querySelector('.header-mobile-header .header-logo');
+    
+    function openMenu() {
+      backdrop?.classList.add('active');
+      panel?.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
-  });
+    
+    function closeMenu() {
+      backdrop?.classList.remove('active');
+      panel?.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    menuBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
+    logoLink?.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+    
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  }
   
-  // Close menu on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      const header = document.querySelector("header[x-data]");
-      // @ts-ignore
-      if (header && header._x_dataStack) {
-        // @ts-ignore
-        header._x_dataStack[0].open = false;
-      }
-    }
-  });
+  // Initialize on page load and after View Transitions
+  document.addEventListener('astro:page-load', initMobileMenu);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initMobileMenu();
+  }
 </script>

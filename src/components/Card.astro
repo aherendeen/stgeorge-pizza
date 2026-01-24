@@ -1,13 +1,58 @@
 ---
 interface Props {
 	class?: string;
+	variant?: "default" | "elevated" | "outlined";
 }
-const { class: className = "" } = Astro.props;
+const { class: className = "", variant = "default" } = Astro.props;
 ---
 
-<div class:list={[
-	"flex flex-col gap-6 p-6 md:p-8 bg-secondary rounded-2xl border border-border shadow-card transition-shadow hover:shadow-card-hover",
-	className
-]}>
+<div class:list={["card-component", `card-${variant}`, className]}>
 	<slot />
 </div>
+
+<style>
+  .card-component {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+  }
+  
+  @media (min-width: 768px) {
+    .card-component {
+      padding: 2rem;
+    }
+  }
+  
+  .card-default {
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .card-default:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-strong);
+  }
+  
+  .card-elevated {
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .card-elevated:hover {
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .card-outlined {
+    background-color: transparent;
+    border: 2px solid var(--color-border);
+  }
+  
+  .card-outlined:hover {
+    border-color: var(--color-accent);
+  }
+</style>

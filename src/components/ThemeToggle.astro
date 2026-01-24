@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 	<button
 		@click="toggle()"
 		type="button"
-		class="theme-toggle p-2.5 rounded-lg transition-all duration-200 hover:bg-tertiary text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 ring-accent"
+		class="theme-toggle"
 		:aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
 		:title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
 	>
@@ -20,9 +20,31 @@ import { Icon } from "astro-icon/components";
 </div>
 
 <style>
+	.theme-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.625rem;
+		border-radius: 0.5rem;
+		background-color: transparent;
+		border: none;
+		color: var(--color-text-secondary);
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+	
+	.theme-toggle:hover {
+		background-color: var(--color-bg-tertiary);
+		color: var(--color-text-primary);
+	}
+	
+	.theme-toggle:focus {
+		outline: none;
+	}
+	
 	.theme-toggle:focus-visible {
-		--tw-ring-offset-width: 2px;
-		--tw-ring-offset-color: var(--color-bg-primary);
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
 	}
 </style>
 

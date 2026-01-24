@@ -7,26 +7,35 @@
     "build": "cross-env TZ=America/Denver astro build",
     "postbuild": "node ./scripts/generate-sitemap.js && node ./scripts/generate-robots.js",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint . --ext .ts,.astro",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
     "@astrojs/mdx": "^4.3.13",
-    "@iconify-json/lucide": "^1.2.86",
     "@playform/inline": "^0.1.2",
     "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.1.18",
-    "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.15.4",
     "astro": "^5.16.15",
     "astro-icon": "^1.1.5",
-    "fontace": "^0.3.1",
     "glightbox": "^3.3.1",
-    "masonry-layout": "^4.2.2",
     "swiper": "^12.0.3",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "cross-env": "^10.1.0"
+    "@iconify-json/lucide": "^1.2.86",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/alpinejs": "^3.13.11",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-astro": "^1.5.0",
+    "fontace": "^0.4.0",
+    "masonry-layout": "^4.2.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.9.3"
   }
 }

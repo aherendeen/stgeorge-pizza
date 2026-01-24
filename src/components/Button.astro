@@ -1,19 +1,31 @@
 ---
 interface Props {
-	color?: "primary" | "secondary" | "outline";
+	variant?: "primary" | "cta" | "outline" | "ghost";
+	size?: "sm" | "md" | "lg";
 	url?: string;
 	newtab?: boolean;
 	As?: "a" | "button";
 	class?: string;
 }
 
-const { color = "primary", url = "", newtab = false, As = "a", class: className = "", ...props } = Astro.props;
+const { 
+	variant = "primary", 
+	size = "md",
+	url = "", 
+	newtab = false, 
+	As = "a", 
+	class: className = "", 
+	...props 
+} = Astro.props;
+
+const sizeClass = size === "sm" ? "button-sm" : size === "lg" ? "button-lg" : "";
 ---
 
 <As
 	class:list={[
 		"not-prose button",
-		`button-${color}`,
+		`button-${variant}`,
+		sizeClass,
 		className
 	]}
 	href={As === "a" ? url : undefined}

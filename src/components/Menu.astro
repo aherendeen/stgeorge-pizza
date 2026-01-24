@@ -9,7 +9,7 @@ const siteLangFormat = siteLang.replace("_", "-");
 
 <!-- Quick Nav -->
 <div id="plate-nav-wrapper" class="mb-12 lg:mb-16 sticky top-16 z-30">
-  <nav class="menu-nav bg-secondary border border-border rounded-lg max-w-4xl mx-auto shadow-card">
+  <nav class="menu-nav rounded-lg max-w-4xl mx-auto">
     <div class="swiper-plates w-auto overflow-hidden">
       <ul id="plate-nav" class="px-2 py-2 swiper-wrapper">
         {
@@ -19,7 +19,7 @@ const siteLangFormat = siteLang.replace("_", "-");
                 href={`#${plate.data.slug}`}
                 class:list={[
                   "menu-nav-link block rounded-lg px-4 py-2 transition-all duration-200 font-medium select-none",
-                  index === 0 ? "menu-nav-active" : "text-secondary hover:text-primary hover:bg-tertiary"
+                  index === 0 && "menu-nav-active"
                 ]}
                 data-category-link={plate.data.slug}
               >
@@ -41,21 +41,21 @@ const siteLangFormat = siteLang.replace("_", "-");
         class="space-y-8 scroll-mt-28"
         data-category-section={plate.data.slug}
       >
-        <div class="flex flex-col items-center gap-2 max-w-lg mx-auto text-balance text-center">
-          <h3 class="text-2xl md:text-3xl font-bold text-primary">{plate.data.prettyName}</h3>
-          <p class="text-secondary">{plate.data.description}</p>
+        <div class="menu-section-header">
+          <h3 class="menu-section-title">{plate.data.prettyName}</h3>
+          <p class="menu-section-desc">{plate.data.description}</p>
         </div>
 
         <dl class="max-w-4xl mx-auto">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             {plate.data.plates.map((item: PlateItem) => (
-              <div class="group p-4 rounded-lg border border-border bg-secondary transition-all hover:shadow-card">
+              <div class="menu-item">
                 <dt>
                   <div class="flex justify-between items-baseline gap-4">
-                    <span class="font-semibold text-lg text-primary">
+                    <span class="menu-item-name">
                       {item.name}
                     </span>
-                    <span class="font-bold text-lg text-accent shrink-0">
+                    <span class="menu-item-price">
                       {new Intl.NumberFormat(siteLangFormat, {
                         style: "currency",
                         currency: siteCurrency,
@@ -64,7 +64,7 @@ const siteLangFormat = siteLang.replace("_", "-");
                   </div>
                 </dt>
                 <dd>
-                  <p class="mt-1 text-muted text-sm leading-relaxed">
+                  <p class="menu-item-desc">
                     {item.description}
                   </p>
                 </dd>
@@ -91,13 +91,90 @@ const siteLangFormat = siteLang.replace("_", "-");
     }
   }
   
+  .menu-nav {
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .menu-nav-link {
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+  }
+  
+  .menu-nav-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-tertiary);
+  }
+  
   .menu-nav-active {
     background-color: var(--color-accent);
-    color: var(--color-surface-950);
+    color: #ffffff !important;
   }
+  
   .menu-nav-active:hover {
     background-color: var(--color-accent-hover);
-    color: var(--color-surface-950);
+    color: #ffffff !important;
+  }
+  
+  .menu-section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 32rem;
+    margin-inline: auto;
+    text-wrap: balance;
+    text-align: center;
+  }
+  
+  .menu-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+  
+  @media (min-width: 768px) {
+    .menu-section-title {
+      font-size: 1.875rem;
+    }
+  }
+  
+  .menu-section-desc {
+    color: var(--color-text-secondary);
+  }
+  
+  .menu-item {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-secondary);
+    transition: all 0.2s ease;
+  }
+  
+  .menu-item:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-border-strong);
+  }
+  
+  .menu-item-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  .menu-item-price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-cta);
+    flex-shrink: 0;
+  }
+  
+  .menu-item-desc {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
   }
 </style>
 
@@ -123,13 +200,11 @@ const siteLangFormat = siteLang.replace("_", "-");
     function setActiveCategory(id: string) {
       categoryLinks.forEach((link) => {
         link.classList.remove("menu-nav-active");
-        link.classList.add("text-secondary", "hover:text-primary", "hover:bg-tertiary");
       });
 
       const currentLink = document.querySelector(`[data-category-link="${id}"]`);
       if (currentLink) {
         currentLink.classList.add("menu-nav-active");
-        currentLink.classList.remove("text-secondary", "hover:text-primary", "hover:bg-tertiary");
         
         const linkIndex = Array.from(categoryLinks).indexOf(currentLink);
         if (linkIndex !== -1) {

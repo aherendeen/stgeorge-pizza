@@ -2,7 +2,6 @@
 import { Icon } from "astro-icon/components";
 import { menuMain } from "../data/menus.js";
 import ThemeToggle from "./ThemeToggle.astro";
-import { phone } from "../data/config";
 
 const rmTrailingSlash = (path: string): string => {
   return path.endsWith("/") && path.length > 1
@@ -25,7 +24,7 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
       
       <!-- Mobile Controls -->
       <div class="header-mobile-controls">
-        <a href={phone.href} class="header-phone-mobile" aria-label="Call us">
+        <a href="/contact" class="header-phone-mobile" aria-label="Contact us">
           <Icon name="lucide:phone" class="size-5" />
         </a>
         <ThemeToggle />
@@ -104,9 +103,9 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
         
         <!-- Panel Footer -->
         <div class="header-mobile-footer">
-          <a href={phone.href} class="header-mobile-phone">
+          <a href="/contact" class="header-mobile-phone">
             <Icon name="lucide:phone" class="size-5" />
-            <span>Call to Order</span>
+            <span>Contact Us</span>
           </a>
         </div>
       </div>
@@ -118,7 +117,7 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
   .header {
     position: sticky;
     top: 0;
-    z-index: 40;
+    z-index: 50;
     width: 100%;
     background-color: color-mix(in srgb, var(--color-bg-primary) 95%, transparent);
     border-bottom: 1px solid var(--color-border);
@@ -249,7 +248,7 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
   .header-mobile-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 40;
+    z-index: 9998;
     background-color: rgb(0 0 0 / 0.5);
     opacity: 0;
     visibility: hidden;
@@ -263,9 +262,10 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
   
   .header-mobile-panel {
     position: fixed;
-    inset-block: 0;
+    top: 0;
     right: 0;
-    z-index: 50;
+    bottom: 0;
+    z-index: 9999;
     width: 100%;
     max-width: 20rem;
     overflow-y: auto;

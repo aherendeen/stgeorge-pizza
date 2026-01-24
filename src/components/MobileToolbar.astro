@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import { phone } from "../data/config";
 
 const rmTrailingSlash = (path: string): string => {
   return path.endsWith("/") && path.length > 1
@@ -13,7 +12,7 @@ const pathname = rmTrailingSlash(Astro.url.pathname);
 const toolbarItems = [
   { href: "/", icon: "lucide:home", label: "Home" },
   { href: "/menu", icon: "lucide:utensils", label: "Menu" },
-  { href: phone.href, icon: "lucide:phone", label: "Call", isPhone: true },
+  { href: "/contact", icon: "lucide:phone", label: "Contact" },
   { href: "/book", icon: "lucide:calendar", label: "Book", isCta: true },
 ];
 ---
@@ -25,9 +24,8 @@ const toolbarItems = [
         href={item.href}
         class:list={[
           "mobile-toolbar-item",
-          item.isPhone && "mobile-toolbar-phone",
           item.isCta && "mobile-toolbar-cta",
-          !item.isPhone && !item.isCta && pathname === item.href && "mobile-toolbar-active"
+          !item.isCta && pathname === item.href && "mobile-toolbar-active"
         ]}
         aria-label={item.label}
       >
@@ -99,15 +97,6 @@ const toolbarItems = [
   
   .mobile-toolbar-active .mobile-toolbar-label {
     font-weight: 700;
-  }
-  
-  .mobile-toolbar-phone {
-    color: var(--color-accent);
-  }
-  
-  .mobile-toolbar-phone:hover {
-    color: var(--color-accent-hover);
-    background-color: var(--color-accent-bg);
   }
   
   .mobile-toolbar-cta {

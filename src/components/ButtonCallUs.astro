@@ -10,25 +10,25 @@ const { variant = "default" } = Astro.props;
 ---
 
 {variant === "prominent" ? (
-  <a href={phone.href} class="call-btn-prominent">
+  <a href="/contact" class="call-btn-prominent">
     <Icon name="lucide:phone" class="size-5" aria-hidden="true" />
     <div class="call-btn-prominent-text">
-      <span class="call-btn-prominent-label">Call to Order</span>
+      <span class="call-btn-prominent-label">Contact Us</span>
       <span class="call-btn-prominent-number">{phone.label}</span>
     </div>
   </a>
 ) : variant === "compact" ? (
-  <a href={phone.href} class="call-btn-compact" aria-label={`Call ${phone.label}`}>
+  <a href="/contact" class="call-btn-compact" aria-label="Contact us">
     <Icon name="lucide:phone" class="size-5" aria-hidden="true" />
     <span>{phone.label}</span>
   </a>
 ) : (
-  <a href={phone.href} class="call-btn not-prose">
+  <a href="/contact" class="call-btn not-prose">
     <div class="call-btn-icon">
       <Icon name="lucide:phone" class="size-5" aria-hidden="true" />
     </div>
     <div class="call-btn-content">
-      <span class="call-btn-label">Call us</span>
+      <span class="call-btn-label">Contact us</span>
       <span class="call-btn-number">{phone.label}</span>
     </div>
   </a>

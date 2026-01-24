@@ -38,8 +38,9 @@ const gallery: Gallery[] = await getCollection("gallery");
               width={400}
               height={400}
               class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              loading={index < 6 ? "eager" : "lazy"}
-              decoding={index < 6 ? "sync" : "async"}
+              loading={index < 4 ? "eager" : "lazy"}
+              fetchpriority={index < 4 ? "high" : undefined}
+              decoding={index < 4 ? "sync" : "async"}
             />
           </a>
         ))
